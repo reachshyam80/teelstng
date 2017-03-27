@@ -53,7 +53,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="testlist-TestNG">
-                    <span class="test-stats">2 tests</span>
+                    <span class="test-stats">1 test</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -90,7 +90,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">11 methods,   11 passed</span>
+                    <span class="method-stats">9 methods,   9 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -136,17 +136,7 @@
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-TestNG" title="com.cox.maven.poc.test.executor.CreateNewDealer" hash-for-method="loadNewDealerRequest">loadNewDealerRequest</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-TestNG" title="com.cox.maven.poc.test.executor.OpportunitiesPageExecutor" hash-for-method="login">login</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-TestNG" title="com.cox.maven.poc.test.executor.CreateNewDealer" hash-for-method="login">login</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -166,28 +156,6 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-TestNG" class="panel TestNG">
-          <div class="suite-TestNG-class-passed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.cox.maven.poc.test.executor.CreateNewDealer</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="loadNewDealerRequest">
-                  </a> <!-- loadNewDealerRequest -->
-                  <span class="method-name">loadNewDealerRequest</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="login">
-                  </a> <!-- login -->
-                  <span class="method-name">login</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-TestNG-class-passed -->
           <div class="suite-TestNG-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -272,23 +240,13 @@
   &lt;test name=&quot;SFDC_UseCase1&quot;&gt;
     &lt;parameter name=&quot;baseUrl&quot; value=&quot;https://test.salesforce.com&quot;/&gt;
     &lt;parameter name=&quot;excelSheetName&quot; value=&quot;Create Opportunity&quot;/&gt;
-    &lt;parameter name=&quot;browserName&quot; value=&quot;firefox&quot;/&gt;
+    &lt;parameter name=&quot;browserName&quot; value=&quot;chrome&quot;/&gt;
     &lt;parameter name=&quot;local&quot; value=&quot;true&quot;/&gt;
     &lt;parameter name=&quot;excelFileName&quot; value=&quot;SalesforceUseCaseTestData&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;com.cox.maven.poc.test.executor.OpportunitiesPageExecutor&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- SFDC_UseCase1 --&gt;
-  &lt;test name=&quot;SFDC_UseCase2&quot;&gt;
-    &lt;parameter name=&quot;baseUrl&quot; value=&quot;https://test.salesforce.com&quot;/&gt;
-    &lt;parameter name=&quot;excelSheetName&quot; value=&quot;Create New Dealer&quot;/&gt;
-    &lt;parameter name=&quot;browserName&quot; value=&quot;chrome&quot;/&gt;
-    &lt;parameter name=&quot;local&quot; value=&quot;true&quot;/&gt;
-    &lt;parameter name=&quot;excelFileName&quot; value=&quot;SalesforceUseCaseTestData&quot;/&gt;
-    &lt;classes&gt;
-      &lt;class name=&quot;com.cox.maven.poc.test.executor.CreateNewDealer&quot;/&gt;
-    &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- SFDC_UseCase2 --&gt;
 &lt;/suite&gt; &lt;!-- TestNG --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -301,9 +259,6 @@
             <ul>
               <li>
                 <span class="test-name">SFDC_UseCase1 (1 class)</span>
-              </li>
-              <li>
-                <span class="test-name">SFDC_UseCase2 (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -329,56 +284,48 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(11);
+data.addRows(9);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'createOpportunities')
 data.setCell(0, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(0, 3, 12792);
+data.setCell(0, 3, 14018);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'loadNewDealerRequest')
-data.setCell(1, 2, 'com.cox.maven.poc.test.executor.CreateNewDealer')
-data.setCell(1, 3, 10321);
+data.setCell(1, 1, 'addProducts')
+data.setCell(1, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
+data.setCell(1, 3, 13382);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'selectProducts')
+data.setCell(2, 1, 'login')
 data.setCell(2, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(2, 3, 8577);
+data.setCell(2, 3, 3942);
 data.setCell(3, 0, 3)
 data.setCell(3, 1, 'addProductToOpportunity')
 data.setCell(3, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(3, 3, 8157);
+data.setCell(3, 3, 3664);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'login')
-data.setCell(4, 2, 'com.cox.maven.poc.test.executor.CreateNewDealer')
-data.setCell(4, 3, 6014);
+data.setCell(4, 1, 'addPartner')
+data.setCell(4, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
+data.setCell(4, 3, 2226);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'addCompetitor')
+data.setCell(5, 1, 'editProduct')
 data.setCell(5, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(5, 3, 2829);
+data.setCell(5, 3, 1866);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'login')
+data.setCell(6, 1, 'addCompetitor')
 data.setCell(6, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(6, 3, 2580);
+data.setCell(6, 3, 1813);
 data.setCell(7, 0, 7)
 data.setCell(7, 1, 'addNotes')
 data.setCell(7, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(7, 3, 2470);
+data.setCell(7, 3, 1629);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'addPartner')
+data.setCell(8, 1, 'selectProducts')
 data.setCell(8, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(8, 3, 2447);
-data.setCell(9, 0, 9)
-data.setCell(9, 1, 'editProduct')
-data.setCell(9, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(9, 3, 2129);
-data.setCell(10, 0, 10)
-data.setCell(10, 1, 'addProducts')
-data.setCell(10, 2, 'com.cox.maven.poc.test.executor.OpportunitiesPageExecutor')
-data.setCell(10, 3, 872);
+data.setCell(8, 3, 1538);
 window.suiteTableData['TestNG']= { tableData: data, tableDiv: 'times-div-TestNG'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 59 seconds</span>
+              <span class="suite-total-time">Total running time: 44 seconds</span>
               <div id="times-div-TestNG">
               </div> <!-- times-div-TestNG -->
             </div> <!-- times-div -->
@@ -404,84 +351,58 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.cox.maven.poc.test.executor.CreateNewDealer</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.cox.maven.poc.test.executor.OpportunitiesPageExecutor</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
                 <span class="method-name">suiteSetUp</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">com.cox.maven.poc.test.executor.OpportunitiesPageExecutor</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setUp(firefox)</span>
-                <span class="method-start">69 ms</span>
+                <span class="method-name">setUp(chrome)</span>
+                <span class="method-start">26 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
                 <span class="method-name">beforeTest(Create Opportunity, SalesforceUseCaseTestData)</span>
-                <span class="method-start">4859 ms</span>
+                <span class="method-start">2456 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">login</span>
-                <span class="method-start">6594 ms</span>
+                <span class="method-start">4150 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">createOpportunities</span>
-                <span class="method-start">9180 ms</span>
+                <span class="method-start">8095 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">selectProducts</span>
-                <span class="method-start">21973 ms</span>
+                <span class="method-start">22114 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">addProducts</span>
-                <span class="method-start">30551 ms</span>
+                <span class="method-start">23655 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">addProductToOpportunity</span>
-                <span class="method-start">31424 ms</span>
+                <span class="method-start">37038 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">addCompetitor</span>
-                <span class="method-start">39582 ms</span>
+                <span class="method-start">40703 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">addPartner</span>
-                <span class="method-start">42411 ms</span>
+                <span class="method-start">42517 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">addNotes</span>
-                <span class="method-start">44858 ms</span>
+                <span class="method-start">44743 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">editProduct</span>
-                <span class="method-start">47329 ms</span>
+                <span class="method-start">46372 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">afterTest</span>
-                <span class="method-start">49459 ms</span>
-              </div> <!-- configuration-test after -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">com.cox.maven.poc.test.executor.CreateNewDealer</div> <!-- chronological-class-name -->
-              <div class="configuration-class before">
-                <span class="method-name">setUp(chrome)</span>
-                <span class="method-start">50843 ms</span>
-              </div> <!-- configuration-class before -->
-              <div class="configuration-class before">
-                <span class="method-name">beforeTest</span>
-                <span class="method-start">52390 ms</span>
-              </div> <!-- configuration-class before -->
-              <div class="test-method">
-                <span class="method-name">login</span>
-                <span class="method-start">52447 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">loadNewDealerRequest</span>
-                <span class="method-start">58462 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-test after">
-                <span class="method-name">afterTest</span>
-                <span class="method-start">68783 ms</span>
+                <span class="method-start">48238 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

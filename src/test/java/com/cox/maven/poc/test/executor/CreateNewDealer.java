@@ -19,7 +19,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.coxautoinc.sfdc.common.CommonPage;
 import com.coxautoinc.sfdc.login.LoginPage;
+import com.coxautoinc.sfdc.newdealerrequest.NewDealerRequestPage;
 import com.coxautoinc.sfdc.utilities.CommonUtil;
 
 public class CreateNewDealer extends TestNgBaseClass {
@@ -30,24 +32,29 @@ public class CreateNewDealer extends TestNgBaseClass {
 	private String userName;
 	private String password;
 	private CommonUtil commonUtil;
+	private NewDealerRequestPage newDealerRequestPage;
+	private CommonPage commonPage;
 	
+    /**
+     * Method to initialize test variables.
+     */
 	@BeforeClass
-	@Parameters({"excelSheetName","excelFileName"})
-	public void beforeTest(String sheetName,String excelFileName) {
+	@Parameters({ "excelSheetName", "excelFileName" })
+	public void beforeTest(String sheetName, String excelFileName) {
 		this.commonUtil = new CommonUtil(driver);
+		this.newDealerRequestPage = new NewDealerRequestPage(driver);
 		this.excelSheetName = sheetName;
-		this.excelFilePath = System.getProperty("user.dir") + "/src/test/resources/testdata/"
-				+ excelFileName+ ".xlsx";
+		this.excelFilePath = System.getProperty("user.dir") + "/src/test/resources/testdata/" + excelFileName + ".xlsx";
 		userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
+		this.commonPage = new CommonPage(driver);
 		try {
 			FileUtils.cleanDirectory(new File("tmp"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// login();
 	}
+
 	@Test
 	public void login() {
 		logger.info("Entering test method: verifyLoginToSalesForce");
@@ -57,7 +64,7 @@ public class CreateNewDealer extends TestNgBaseClass {
 		// Navigate to SFDC.
 		logger.info("Navigating to url: {}", baseUrl);
 		driver.get(baseUrl);
-		loginPage.loginToSalesForce(userName,password);
+		loginPage.loginToSalesForce(userName, password);
 		screenshot("Login Page onload");
 		// Assert that the search button is displayed to show that we are logged
 		// in,
@@ -73,40 +80,28 @@ public class CreateNewDealer extends TestNgBaseClass {
 	public void loadNewDealerRequest() {
 		System.out.println("second class for suite");
 		try {
-
-			wait.until(ExpectedConditions.elementToBeClickable(By.linkText("New Dealer Request")));
-
-			// driver.findElement(By.xpath("//a[contains(text(), 'New Dealer
-			// Request']")).click();
-			driver.findElement(By.linkText("New Dealer Request")).click();
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("00Nj000000C1bRV")));
+			newDealerRequestPage.createNewDealerReq();
 			screenshot("Dealer Page onload");
-			Select dropdown = new Select(driver.findElement(By.id("00Nj000000C1bRV")));
-			dropdown.selectByIndex(1);
-			if (driver.findElement(By.id("00Nj000000C14Ox")).isSelected()) {
-				driver.findElement(By.id("00Nj000000C14Ox")).click();
-			}
-			Select ownershipChange = new Select(driver.findElement(By.id("00Nj000000C1bRK")));
-			ownershipChange.selectByIndex(1);
-			driver.findElement(By.id("00Nj000000C14OY")).sendKeys("TestAutomationDemoNew1");
-			new Select(driver.findElement(By.id("00Nj000000C1bRJ"))).selectByIndex(1);
-			driver.findElement(By.id("CF00Nj000000C14Ty")).sendKeys("Test Customer 1");
-
-			new Select(driver.findElement(By.id("00Nj000000C1bRI"))).selectByIndex(1);
-			for (int i = 1; i <= 4; i++)
-				new Select(driver.findElement(By.id("00Nj000000C1bRN_unselected"))).selectByIndex(i);
-			driver.findElement(By.xpath("//a[@title = 'Add']")).click();
-			driver.findElement(By.id("00Nj000000C1bRH")).sendKeys("www.testAutomation.com");
-			new Select(driver.findElement(By.id("00Nj000000C1bRG"))).selectByIndex(2);
-			new Select(driver.findElement(By.id("00Nj000000C1bRL"))).selectByIndex(2);
-			new Select(driver.findElement(By.id("00Nj000000C1bRM"))).selectByIndex(2);
-			driver.findElement(By.id("00Nj000000C1bRP")).sendKeys("111-222-3333");
-			driver.findElement(By.id("00Nj000000C1bRS")).sendKeys("111 Summit Trl");
-			driver.findElement(By.id("00Nj000000C1bRO")).sendKeys("Dunwoody");
-			new Select(driver.findElement(By.id("00Nj000000C1bRR"))).selectByIndex(1);
-			driver.findElement(By.id("00Nj000000C1bRQ")).sendKeys("30090");
-			new Select(driver.findElement(By.id("00Nj000000C1bR8"))).selectByIndex(2);
-			driver.findElement(By.name("save")).click();
+			newDealerRequestPage.sendKeysToUrgentReq(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Urgent Request"));
+			newDealerRequestPage.sendKeysToSubmit(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Submit"));
+			newDealerRequestPage.sendKeysToOwnershipChng(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Ownership Change"));
+			newDealerRequestPage.sendKeysToAccntName(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Account Name"));
+			newDealerRequestPage.sendKeysToDealerGrp(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Existing Dealer Group"));
+			newDealerRequestPage.sendKeysToDealerGrpAccnt(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Dealer Group Account"));
+			newDealerRequestPage.sendKeysToDealerType(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Dealer Type"));
+			newDealerRequestPage.selectNamePlate("");
+			newDealerRequestPage.addNamePlate();
+			newDealerRequestPage.sendKeysToURL(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Customer's Website URL"));
+			newDealerRequestPage.sendKeysToSelCustTyp(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Customer Type"));
+			newDealerRequestPage.sendKeysToSelLotSizeUsed(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Lot Size - New"));
+			newDealerRequestPage.sendKeysToSelNewLotSize(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Lot Size - Used"));
+			newDealerRequestPage.sendKeysToPhone(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Physical Location Phone"));
+			newDealerRequestPage.sendKeysToStreet(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Physical Location Street 1"));
+			newDealerRequestPage.sendKeysToCity(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Physical Location City"));
+			newDealerRequestPage.sendKeysToSelState(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Physical Location State"));
+			newDealerRequestPage.sendKeysToZip(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Physical Location Postal Code"));
+			newDealerRequestPage.sendKeysToSelBillingAdd(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Billing Address same as Physical?"));
+			commonPage.clickSaveBtn();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,13 +109,11 @@ public class CreateNewDealer extends TestNgBaseClass {
 		System.out.println("second class for suite");
 	}
 
-
-
 	@AfterTest
 	public void afterTest() {
 		screenshot("Save New Dealer Request");
 		// driver.close();
-		driver.quit();
+		//driver.quit();
 
 	}
 

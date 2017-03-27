@@ -36,8 +36,8 @@ public abstract class TestNgBaseClass {
 	private String excelFilePath;
 	private String excelSheetName;
 
-	
-	/**Constructor
+	/**
+	 * Constructor
 	 * 
 	 */
 	public TestNgBaseClass() {
@@ -56,19 +56,23 @@ public abstract class TestNgBaseClass {
 		baseUrl = capability.getCapability("baseUrl").toString();
 	}
 
-	  /**
-     * Made this function for readability. For example, instead of doing this
-     * loginScreenModule.loginToDealerSite(capability.getCapability("userName").toString(), capability.getCapability
-     * ("userPassword").toString()) by doing this loginScreenModule.loginToDealerSite(parameter("userName"),
-     * parameter("userPassword")) is cleaner. Additionally, use this method for arbitrary parameters such as logging
-     * into the database, navigating to another url, or etc. The code can be,
-     * loginScreenModule.thisExampleModuleToLoginTheDb(parameter("dbUserName"), parameter("dbUserPassword")) and your
-     * testng.xml will pass the dbUserName and dbUserPassword.
-     *
-     * @param paramName in value
-     *
-     * @return out value
-     */
+	/**
+	 * Made this function for readability. For example, instead of doing this
+	 * loginScreenModule.loginToDealerSite(capability.getCapability("userName").toString(),
+	 * capability.getCapability ("userPassword").toString()) by doing this
+	 * loginScreenModule.loginToDealerSite(parameter("userName"),
+	 * parameter("userPassword")) is cleaner. Additionally, use this method for
+	 * arbitrary parameters such as logging into the database, navigating to
+	 * another url, or etc. The code can be,
+	 * loginScreenModule.thisExampleModuleToLoginTheDb(parameter("dbUserName"),
+	 * parameter("dbUserPassword")) and your testng.xml will pass the dbUserName
+	 * and dbUserPassword.
+	 *
+	 * @param paramName
+	 *            in value
+	 *
+	 * @return out value
+	 */
 	protected String parameter(String paramName) {
 		return capability.getCapability(paramName).toString();
 	}
@@ -160,15 +164,15 @@ public abstract class TestNgBaseClass {
 			capability.setCapability("acceptSslCerts", true);
 			try {
 				driver = new RemoteWebDriver(new URL(capability.getCapability("remoteUrl").toString()), capability);
-			} catch (org.openqa.selenium.WebDriverException e) { 
+			} catch (org.openqa.selenium.WebDriverException e) {
 				driver = new RemoteWebDriver(new URL(capability.getCapability("remoteUrl").toString()), capability);
 			}
 		} else {
 			if (browserName.equalsIgnoreCase("chrome")) {
-				if(System.getProperty("os.name").startsWith("Mac")){
+				if (System.getProperty("os.name").startsWith("Mac")) {
 					System.setProperty("webdriver.chrome.driver", macPath.concat("chromedriver"));
-				}else{
-					System.setProperty("webdriver.chrome.driver", windowsPath.concat("chromedriver.exe"));	
+				} else {
+					System.setProperty("webdriver.chrome.driver", windowsPath.concat("chromedriver.exe"));
 				}
 				driver = new ChromeDriver();
 			} else if (browserName.equalsIgnoreCase("internet explorer")) {
@@ -178,8 +182,8 @@ public abstract class TestNgBaseClass {
 				// You don't need to set the path as FireFox driver is built
 				// into Selenium,
 				// but you must have FireFox installed.
-				if(System.getProperty("os.name").startsWith("Mac")){
-				System.setProperty("webdriver.gecko.driver", macPath.concat("geckodriver"));
+				if (System.getProperty("os.name").startsWith("Mac")) {
+					System.setProperty("webdriver.gecko.driver", macPath.concat("geckodriver"));
 				}
 				driver = new FirefoxDriver();
 			}

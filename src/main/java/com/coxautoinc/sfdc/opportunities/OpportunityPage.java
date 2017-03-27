@@ -121,7 +121,7 @@ public class OpportunityPage {
     
     public void selectRcdTyp(String recType){
     	logger.info("Entering selectRcdTyp");
-    	commonUtil.waitForElementToBeVisible(opportunitySelector.getSelectStage()).sendKeys(recType);
+    	commonUtil.waitForElementToBeClickable(opportunitySelector.getSelectRcdTyp()).sendKeys(recType);
     }
     
     public void continueoppcreate(){
