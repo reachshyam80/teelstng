@@ -71,7 +71,6 @@ class ExcelReader {
             } else {
                 if (filePath.endsWith(".xlsx")) {
                     fis = new FileInputStream(filePath);
-                    System.out.println("aaaaaa");
                     XSSFWorkbook workbook = new XSSFWorkbook(fis);
                     XSSFSheet sheet = workbook.getSheet(sheetName);
                     Iterator rows = sheet.rowIterator();

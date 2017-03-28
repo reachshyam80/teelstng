@@ -35,6 +35,10 @@ public class CreateNewDealer extends TestNgBaseClass {
     /**
      * Method to initialize test variables.
      */
+	/**
+	 * @param sheetName
+	 * @param excelFileName
+	 */
 	@BeforeClass
 	@Parameters({ "excelSheetName", "excelFileName" })
 	public void beforeTest(String sheetName, String excelFileName) {
@@ -45,11 +49,11 @@ public class CreateNewDealer extends TestNgBaseClass {
 		userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
 		this.commonPage = new CommonPage(driver);
-		try {
+		/*try {
 			FileUtils.cleanDirectory(new File("tmp"));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	/**
 	 * Test to verify that a user can successfully log in to SFDC
@@ -64,7 +68,7 @@ public class CreateNewDealer extends TestNgBaseClass {
 		logger.info("Navigating to url: {}", baseUrl);
 		driver.get(baseUrl);
 		loginPage.loginToSalesForce(userName, password);
-		screenshot("Login Page onload");
+		//screenshot("Login Page onload");
 		// Assert that the search button is displayed to show that we are logged
 		// in,
 		// return a custom error message if it is not found.
@@ -81,7 +85,7 @@ public class CreateNewDealer extends TestNgBaseClass {
 	public void loadNewDealerRequest() {
 		try {
 			newDealerRequestPage.createNewDealerReq();
-			screenshot("Dealer Page onload");
+			//screenshot("Dealer Page onload");
 			newDealerRequestPage.sendKeysToUrgentReq(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Urgent Request"));
 			newDealerRequestPage.sendKeysToSubmit(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Submit"));
 			newDealerRequestPage.sendKeysToOwnershipChng(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Ownership Change"));
@@ -113,7 +117,7 @@ public class CreateNewDealer extends TestNgBaseClass {
 	 */
 	@AfterTest
 	public void afterTest() {
-		screenshot("Save New Dealer Request");
+		//screenshot("Save New Dealer Request");
 		// driver.close();
 		driver.quit();
 

@@ -1,5 +1,8 @@
 package com.coxautoinc.sfdc.opportunities;
 
+import java.util.Set;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +22,7 @@ public class OpportunityPage {
 
     private final CommonUtil commonUtil;
     private final OpportunitySelector opportunitySelector;
+    private final WebDriver driver;
 
     //~ Constructors ---------------------------------------------------------------------------------------------------
 
@@ -29,6 +33,7 @@ public class OpportunityPage {
      */
     public OpportunityPage(WebDriver driver) {
         this.commonUtil = new CommonUtil(driver);
+        this.driver = driver;
         this.opportunitySelector = new OpportunitySelector();
     }
 
@@ -142,4 +147,39 @@ public class OpportunityPage {
     	logger.info("Entering addPartnerToOpp");
     	commonUtil.waitForElementToBeClickable(opportunitySelector.getNewNoteBtn()).click();
     }
+    /**
+     * Method to switch to the Select account name from Pop up
+     */
+    public void selectAccntName(String accountName) {
+        // Store the current window.
+        String parentWindowHandler = driver.getWindowHandle();
+        String subWindowHandler = null;
+
+        // Get all available windows.
+        Set<String> handles = driver.getWindowHandles();
+
+        // Iterate until new window appears.
+        while (handles.size() < 2) {
+            handles = driver.getWindowHandles();
+        }
+
+        // Set subWindow as the newest window found.
+        for (String handle : handles) {
+            subWindowHandler = handle;
+        }
+
+        // Switch to popup window.
+        driver.switchTo().window(subWindowHandler);
+        driver.switchTo().frame("resultsFrame");
+        // Click OK button.
+        commonUtil.waitForElementToBeClickable(By.linkText(accountName)).click();
+
+        // Switch back to the initial window.
+        driver.switchTo().window(parentWindowHandler);
+    }
+    
+    public void clickAccntNamePopup(){
+    	commonUtil.waitForElementToBeClickable(opportunitySelector.getAddAccntPopup()).click();
+    }
+
 }

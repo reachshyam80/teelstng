@@ -44,7 +44,6 @@ public abstract class TestNgBaseClass {
 		baseUrl = "";
 		this.macPath = "src//test//resources//drivers//mac//";
 		this.windowsPath = "src//test//resources//drivers//windows";
-		System.out.println(System.getProperty("os.name"));
 	}
 
 	@BeforeClass(alwaysRun = true)

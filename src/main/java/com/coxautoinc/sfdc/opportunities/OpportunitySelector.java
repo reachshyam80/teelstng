@@ -24,6 +24,7 @@ class OpportunitySelector {
     private By addPartner;
     private By addCompetitor;
     private By newNoteBtn;
+    private By addAccntPopup;
 
     //~ Constructors ---------------------------------------------------------------------------------------------------
 
@@ -96,6 +97,10 @@ class OpportunitySelector {
 		return newNoteBtn;
 	}
 
+	public By getAddAccntPopup() {
+		return addAccntPopup;
+	}
+
 	/**
      * Method to initialize all selector variables.
      */
@@ -115,5 +120,6 @@ class OpportunitySelector {
         addPartner = By.name("newPartner");
         addCompetitor = By.name("newComp");
         newNoteBtn = By.name("newNote");
+        addAccntPopup = By.id("opp4_lkwgt");
     }
 }

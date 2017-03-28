@@ -62,11 +62,9 @@ public class CommonUtil {
         String columnValue = null;
         try {
             HashMap<String, List<String>> exclData = excl.getExcel(filePath, sheetName);
-            System.out.println("aaaaaa");
             List<String> columnData = exclData.get(columnName);
             for (int i = 0; i < columnData.size(); i++) {
                 columnValue = columnData.get(0);
-                System.out.println(columnValue);
             }
         } catch (Exception e) {
         	

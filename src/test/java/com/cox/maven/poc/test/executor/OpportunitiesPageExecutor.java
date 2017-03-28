@@ -57,12 +57,8 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	@BeforeClass
 	@Parameters({ "excelSheetName", "excelFileName" })
 	public void beforeTest(String sheetName, String excelFileName) {
-		System.out.println("Before Test");
-		System.out.println("excelSheetName1" + excelSheetName);
 		this.excelSheetName = sheetName;
 		this.excelFilePath = System.getProperty("user.dir") + "/src/test/resources/testdata/" + excelFileName + ".xlsx";
-		System.out.println(excelFilePath);
-		System.out.println(excelSheetName);
 		this.opportunityPage = new OpportunityPage(driver);
 		this.addProductsPage = new AddProductsPage(driver);
 		this.commonPage = new CommonPage(driver);
@@ -80,7 +76,6 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.productThreeName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Name");
 		this.userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		this.password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
-		System.out.println(productOneName);
 		productThreeName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Name");
 	}
 
@@ -101,15 +96,17 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 
 	/**
 	 * Test to verify that a user can create an opportunity
+	 * @throws InterruptedException 
 	 */
 	@Test(dependsOnMethods = "login")
-	public void createOpportunities() {
+	public void createOpportunities() throws InterruptedException {
 		opportunityPage.clickOpportunitiesTab();
 		opportunityPage.newOppbtn();
 		opportunityPage.selectRcdTyp(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
 		opportunityPage.sendKeysToOppName(opportunityName);
-		opportunityPage.sendKeysToAccntName(accountName);
+		opportunityPage.clickAccntNamePopup();
+		opportunityPage.selectAccntName(accountName);
 		opportunityPage.sendKeysToEndDate(closeDate);
 		opportunityPage.selectType(oppType);
 		opportunityPage.selectStage(oppStage);
