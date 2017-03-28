@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterTest;
@@ -282,7 +281,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 */
 	@AfterTest
 	public void afterTest() throws IOException {
-		//driver.quit();
+		driver.quit();
 	}
 
 }

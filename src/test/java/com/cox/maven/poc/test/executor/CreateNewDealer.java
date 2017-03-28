@@ -7,11 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterTest;
@@ -54,7 +51,9 @@ public class CreateNewDealer extends TestNgBaseClass {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Test to verify that a user can successfully log in to SFDC
+	 */
 	@Test
 	public void login() {
 		logger.info("Entering test method: verifyLoginToSalesForce");
@@ -75,10 +74,11 @@ public class CreateNewDealer extends TestNgBaseClass {
 		logger.info("Exiting test method: verifyLoginToSalesForce");
 
 	}
-
+	/**
+	 * Test to verify that a user can create a new dealer
+	 */
 	@Test(dependsOnMethods = "login")
 	public void loadNewDealerRequest() {
-		System.out.println("second class for suite");
 		try {
 			newDealerRequestPage.createNewDealerReq();
 			screenshot("Dealer Page onload");
@@ -108,15 +108,19 @@ public class CreateNewDealer extends TestNgBaseClass {
 		}
 		System.out.println("second class for suite");
 	}
-
+	/**
+	 * After Test Method to perform actions after the Test is complete
+	 */
 	@AfterTest
 	public void afterTest() {
 		screenshot("Save New Dealer Request");
 		// driver.close();
-		//driver.quit();
+		driver.quit();
 
 	}
-
+	/**
+	 * Method to get the required screenshots
+	 */
 	public void screenshot(String page) {
 		try {
 			File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

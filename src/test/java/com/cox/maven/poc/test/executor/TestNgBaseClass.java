@@ -33,8 +33,6 @@ public abstract class TestNgBaseClass {
 	private static final DesiredCapabilities capability = new DesiredCapabilities();
 	private Map<String, String> testParameters;
 	private final ArrayList<ArrayList<String>> systemParameters;
-	private String excelFilePath;
-	private String excelSheetName;
 
 	/**
 	 * Constructor

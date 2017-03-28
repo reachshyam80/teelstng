@@ -1,11 +1,10 @@
 package com.coxautoinc.sfdc.opportunities;
 
-import com.coxautoinc.sfdc.utilities.CommonUtil;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.coxautoinc.sfdc.utilities.CommonUtil;
 
 /**
  * Page Object for the Opportunity page.
