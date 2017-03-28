@@ -71,8 +71,6 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.addPartnerPage = new AddPartnerPage(driver);
 		this.addNotesPage = new AddNotesPage(driver);
 		this.commonUtil = new CommonUtil(driver);
-		// productOneName = "ADP Write Back";
-		// productTwoName = "Labor Time Guides- Honda";
 		this.productOneName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product1 Name");
 		this.productTwoName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product2 Name");
 		this.opportunityName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Opportunity Name");
