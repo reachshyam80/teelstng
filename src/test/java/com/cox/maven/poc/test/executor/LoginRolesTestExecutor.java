@@ -2,13 +2,20 @@ package com.cox.maven.poc.test.executor;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,20 +95,20 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 			roleBasedLoginPage.clickAllTabs();
 		try{
 		if(driver.findElements(roleBasedLoginSelector.getBuAccountLink()).size() > 0 ){
-			System.out.println("BU Search present");
-			logger.error("The Search BU link field was displayed for user: " + users + "with role" + role.get(i)+
-					 "BU Account Team");
+			screenshot("BU Account team link for " + users+ "  -  "+ role.get(i));
+			logger.error("The Search BU link field was displayed for user: " + users + " with role  " + role.get(i)+
+					 " BU Account Team");
 		}
 		}catch (Exception e) {
 			
 		}
 		if(driver.findElements(roleBasedLoginSelector.getBuAccountLinkSearch()).size() > 0 ){
-			System.out.println("BU Account Team Search");
-			logger.error("The BU Account Team Search link field was displayed for user: " + users + "with role" + role.get(i)+
-					 "BU Account Team");
+			screenshot("BU Account team Search link for " + users+ " - "+ role.get(i));
+			logger.error("The BU Account Team Search link field was displayed for user:  " + users + " with role  " + role.get(i)+
+					 " BU Account Team");
 		}
 		}else{
-			logger.info("All tabs link is not present for the user "+users+" with role "+role.get(i));
+			logger.info("All tabs link is not present for the user " +users+ " with role "+role.get(i));
 		}
 		roleBasedLoginPage.clickLogoutMenu();
 		roleBasedLoginPage.clickLogoutLink();
@@ -112,8 +119,23 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		i++;
 		}	
 	}
+	/**
+	 * Method to get the required screenshots
+	 */
+	public void screenshot(String page) {
+		try {
+			File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd hh mm a");
+			Date date = new Date();
+
+			FileUtils.copyFile(screenshot,
+					new File("Screenshots" + File.separator + "ID-" + page + "-DATE-" + dateFormat.format(date) + ".png"));
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+	}
 	@AfterClass
-	public void tearDown() throws IOException{
+	public void afterTest() throws IOException{
 		 driver.quit();
 	}
 }
