@@ -61,6 +61,14 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		HashMap<String, List<String>> exclData = excl.getExcel(excelFilePath, sheetName);
 		user = exclData.get("User");
 		role = exclData.get("Role");
+		File directory = new File("Screenshots");
+		try {
+			if(directory.exists()){
+				FileUtils.cleanDirectory(directory);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Test to verify that a user can successfully log in to SFDC
