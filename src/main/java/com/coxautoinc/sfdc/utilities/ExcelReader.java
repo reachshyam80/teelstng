@@ -22,7 +22,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  * Contains logic to read from Excel sheets
  */
-class ExcelReader {
+public class ExcelReader {
 
     //~ Methods --------------------------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ class ExcelReader {
      *
      * @throws Exception on error
      */
-    HashMap<String, List<String>> getExcel(String filePath, String sheetName) throws Exception {
+    public HashMap<String, List<String>> getExcel(String filePath, String sheetName) throws Exception {
         HashMap<String, List<String>> sheetData = new HashMap<>();
         DataFormatter formatter = new DataFormatter();
 
