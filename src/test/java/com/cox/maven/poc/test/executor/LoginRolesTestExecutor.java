@@ -1,11 +1,11 @@
 package com.cox.maven.poc.test.executor;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,6 +69,10 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//Connection con = DriverManager.getConnection("jdbc:oracle:thin://qadbmdm1:1521/QAMDM1","api","soupqa");
+		//Class.forName("oracle.jdbc.driver.­OracleDriver");
+		//Statement stmt = con.createStatement();	
+		//ResultSet rs = stmt.executeQuery("select *  from employee");
 	}
 	/**
 	 * Test to verify that a user can successfully log in to SFDC
@@ -89,7 +93,8 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 	 */
 	@Test(dependsOnMethods = "login")
 	public void roleBasedLogin(){
-		int i = 0;
+		String userRole = "";
+		String userProfile = "";
 		//Navigate to people tab
 		for(String users: user){
 			roleBasedLoginPage.clickPeopleTab();
@@ -97,34 +102,39 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		wait.until(ExpectedConditions.elementToBeClickable(By.linkText(users))).click();;
 		roleBasedLoginPage.clickUserActionMenu();
 		roleBasedLoginPage.clickUserDetailLink();
+		userRole = driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[1]/td[4]/a")).getText();
+		userProfile = driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[3]/td[4]/a")).getText();
+		System.out.println("userRole"+userRole);
+		System.out.println("userProfile"+userProfile);
 		if(driver.findElements(roleBasedLoginSelector.getUserLoginBtn()).size() > 0 ){
+			//System.out.println(driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[3]/td[4]/a")).getText());
 			roleBasedLoginPage.clickLoginBtn();
+			
 		if(driver.findElements(roleBasedLoginSelector.getAllTabsMenu()).size() > 0 ){
 			roleBasedLoginPage.clickAllTabs();
 		try{
 		if(driver.findElements(roleBasedLoginSelector.getBuAccountLink()).size() > 0 ){
-			screenshot("BU Account team link for " + users+ "  -  "+ role.get(i));
-			logger.error("The Search BU link field was displayed for user: " + users + " with role  " + role.get(i)+
+			screenshot("BU Account team link for " + users+ "  -  "+ userRole);
+			logger.error("The Search BU link field was displayed for user: " + users + " with role  " + userRole+ " and profile "+userProfile +
 					 " BU Account Team");
 		}
 		}catch (Exception e) {
 			
 		}
 		if(driver.findElements(roleBasedLoginSelector.getBuAccountLinkSearch()).size() > 0 ){
-			screenshot("BU Account team Search link for " + users+ " - "+ role.get(i));
-			logger.error("The BU Account Team Search link field was displayed for user:  " + users + " with role  " + role.get(i)+
+			screenshot("BU Account team Search link for " + users+ " - "+ userRole);
+			logger.error("The BU Account Team Search link field was displayed for user:  " + users + " with role  " + userRole+ " and profile "+userProfile +
 					 " BU Account Team");
 		}
 		}else{
-			logger.info("All tabs link is not present for the user " +users+ " with role "+role.get(i));
+			logger.info("All tabs link is not present for the user " +users+ " with role " + userRole+ " and profile "+userProfile );
 		}
 		roleBasedLoginPage.clickLogoutMenu();
 		roleBasedLoginPage.clickLogoutLink();
 		
 		}else{
-			logger.info("Login button not present for the user "+users+" with role "+role.get(i));
+			logger.info("Login button not present for the user "+users+" with role "+ userRole+ " and profile "+userProfile);
 		}
-		i++;
 		}	
 	}
 	/**
