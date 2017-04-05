@@ -1,11 +1,19 @@
 package com.cox.maven.poc.test.executor;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,8 +21,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -23,7 +34,9 @@ import org.testng.annotations.Parameters;
  * @author asreekanta
  *
  */
-public abstract class TestNgBaseClass {
+public class TestNgBaseClass {
+	
+	private static final Logger logger = LoggerFactory.getLogger(TestNgBaseClass.class);
 
 	WebDriver driver;
 	WebDriverWait wait;
@@ -188,4 +201,34 @@ public abstract class TestNgBaseClass {
 		wait = new WebDriverWait(driver, 30);
 		driver.manage().window().maximize();
 	}
+	
+	/**
+     * Tear down the Web Driver
+     *
+     * @throws IOException on error
+     */
+    @AfterClass(alwaysRun = true)
+    public void teardown() throws IOException {
+        // This takes a screenshot of the 'test(s)' when the @AfterClass is called. This is useful when using the
+        // Selenium Grid.
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd hh mm a");
+            Date date = new Date();
+
+            FileUtils.copyFile(screenshot,
+                new File(
+                    "tmp" + File.separator + "ID-" + ((RemoteWebDriver) driver).getSessionId() + "-DATE-"
+                        + dateFormat.format(date) + ".png"));
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            // Some folks have non-windows laptop and this causes failure since there is no such 'taskkill' executable
+            // on non-windows OS
+            Runtime.getRuntime().exec("taskkill /f /im plugin-container.exe");
+        }
+        driver.quit();
+    }
+
 }
