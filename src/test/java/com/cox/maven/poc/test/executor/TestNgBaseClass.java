@@ -179,6 +179,7 @@ public class TestNgBaseClass {
 			}
 		} else {
 			if (browserName.equalsIgnoreCase("chrome")) {
+				System.out.println(System.getProperty("os.name"));
 				if (System.getProperty("os.name").startsWith("Mac")) {
 					System.setProperty("webdriver.chrome.driver", macPath.concat("chromedriver"));
 				} else {
@@ -193,7 +194,9 @@ public class TestNgBaseClass {
 				// into Selenium,
 				// but you must have FireFox installed.
 				if (System.getProperty("os.name").startsWith("Mac")) {
-					System.setProperty("webdriver.gecko.driver", macPath.concat("geckodriver"));
+					//System.setProperty("webdriver.gecko.driver", macPath.concat("geckodriver"));
+					//FirefoxDriverManager.getInstance().setup();
+					//System.setProperty("webdriver.firefox.marionette", macPath.concat("geckodriver"));
 				}
 				driver = new FirefoxDriver();
 			}
@@ -207,7 +210,7 @@ public class TestNgBaseClass {
      *
      * @throws IOException on error
      */
-    @AfterClass(alwaysRun = true)
+    //@AfterClass(alwaysRun = true)
     public void teardown() throws IOException {
         // This takes a screenshot of the 'test(s)' when the @AfterClass is called. This is useful when using the
         // Selenium Grid.

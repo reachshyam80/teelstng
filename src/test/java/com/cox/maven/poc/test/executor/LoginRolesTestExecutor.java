@@ -91,23 +91,29 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 	/**
 	 * Test to verify if the BU search button/link is present for different user roles
 	 */
-	@Test(dependsOnMethods = "login")
+	@Test(dependsOnMethods = "login",retryAnalyzer = com.coxautoinc.sfdc.utilities.TestNGRetry.class)
 	public void roleBasedLogin(){
 		String userRole = "";
 		String userProfile = "";
 		//Navigate to people tab
 		for(String users: user){
+			driver.navigate().refresh();
 			roleBasedLoginPage.clickPeopleTab();
 			roleBasedLoginPage.sendKeysToName(users);
-		wait.until(ExpectedConditions.elementToBeClickable(By.linkText(users))).click();;
+			 commonUtil.waitForElementUsingFluentWait(By.linkText(users)).click();
+		//wait.until(ExpectedConditions.elementToBeClickable(By.linkText(users))).click();;
 		roleBasedLoginPage.clickUserActionMenu();
 		roleBasedLoginPage.clickUserDetailLink();
+		commonUtil.waitForElementToBeVisible(By.xpath(".//table[@class='detailList']/tbody/tr[1]/td[4]/a"));
 		userRole = driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[1]/td[4]/a")).getText();
 		userProfile = driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[3]/td[4]/a")).getText();
 		System.out.println("userRole"+userRole);
 		System.out.println("userProfile"+userProfile);
 		if(driver.findElements(roleBasedLoginSelector.getUserLoginBtn()).size() > 0 ){
 			//System.out.println(driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[3]/td[4]/a")).getText());
+			commonUtil.waitForElementToBeVisible(By.xpath(".//table[@class='detailList']")).click();
+			screenshot("USer Details " + users+ "  -  "+ userRole);
+			//driver.findElement(By.xpath("//html")).click();
 			roleBasedLoginPage.clickLoginBtn();
 			
 		if(driver.findElements(roleBasedLoginSelector.getAllTabsMenu()).size() > 0 ){
@@ -136,6 +142,7 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 			logger.info("Login button not present for the user "+users+" with role "+ userRole+ " and profile "+userProfile);
 		}
 		}	
+		
 	}
 	/**
 	 * Method to get the required screenshots
@@ -154,6 +161,7 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 	}
 	@AfterClass
 	public void afterTest() throws IOException{
-		 driver.quit();
+		//roleBasedLoginPage.clickPeopleTab();
+		 //driver.quit();
 	}
 }

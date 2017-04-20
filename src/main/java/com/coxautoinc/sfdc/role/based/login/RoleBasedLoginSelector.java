@@ -79,6 +79,8 @@ public class RoleBasedLoginSelector {
     	userActionMenu = By.xpath("//a[@title = 'User Action Menu']");
     	userDetails = By.xpath("//a[@title = 'User Detail']");
     	userLoginBtn = By.name("login");
+    	//userLoginBtn = By.xpath(".//*[@id='topButtonRow']/input[4]");
+    	//userLoginBtn = By.xpath("//button[@title = 'Login']");
     	allTabsMenu = By.xpath("//img[@title='All Tabs']");
     	buAccountLink = By.linkText("BU Account Team");
     	buAccountLinkSearch = By.linkText("BU Account Team Search");

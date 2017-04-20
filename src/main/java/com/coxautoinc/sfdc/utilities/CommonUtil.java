@@ -36,7 +36,7 @@ public class CommonUtil {
      * @param driver in value
      */
     public CommonUtil(WebDriver driver) {
-        this.wait = new WebDriverWait(driver, 30);
+        this.wait = new WebDriverWait(driver, 45);
         this.fluentWait =
             new FluentWait<>(driver).withTimeout(2, TimeUnit.MINUTES).pollingEvery(1, TimeUnit.SECONDS).ignoring(
                 org.openqa.selenium.NoSuchElementException.class).ignoring(

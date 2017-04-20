@@ -43,7 +43,7 @@ public class RoleBasedLoginPage {
     public void sendKeysToName(String name){
     	logger.info("Entering sendKeysToName", name);
         //commonUtil.waitForElementToBeVisible(homeSelector.getSearchInput()).clear();
-        commonUtil.waitForElementToBeVisible(roleBasedLoginSelector.getPeopleSearchInput()).sendKeys(name);
+        commonUtil.waitForElementUsingFluentWait(roleBasedLoginSelector.getPeopleSearchInput()).sendKeys(name);
     }
     public void clickUserActionMenu() {
         logger.info("Clicking clickUserActionMenu.");
@@ -55,6 +55,7 @@ public class RoleBasedLoginPage {
     }
     public void clickLoginBtn() {
         logger.info("Clicking clickLoginBtn.");
+        //commonUtil.waitForElementToBeClickable(roleBasedLoginSelector.getUserLoginBtn());
         commonUtil.waitForElementToBeClickable(roleBasedLoginSelector.getUserLoginBtn()).click();
     }
     
