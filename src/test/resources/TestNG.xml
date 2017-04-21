@@ -15,21 +15,21 @@
 
 		</classes>
 	</test>
-	<test name="SFDC_UseCase2">
+	<!--<test name="SFDC_UseCase2">
 		<parameter name="baseUrl" value="https://test.salesforce.com" />
 		<parameter name="local" value="true" />
 		<parameter name="browserName" value="chrome" />
 		<parameter name="excelFileName" value="SalesforceUseCaseTestData" />
 		<parameter name="excelSheetName" value="Create New Dealer" />
 
-		<!-- Used to point to a Selenium Grid Hub -->
+
 		<parameter name="remoteUrl" value="http://10.229.30.19:4444/wd/hub"/> 
 
 		<classes>
 			<class name="com.cox.maven.poc.test.executor.CreateNewDealer" />
 
 		</classes>
-	</test>
+	</test>-->
 	<test name="SFDC_UseCase3">
 		<parameter name="baseUrl" value="https://test.salesforce.com" />
 		<parameter name="local" value="false" />
