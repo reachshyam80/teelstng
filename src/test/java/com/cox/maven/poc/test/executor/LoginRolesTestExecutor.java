@@ -97,7 +97,7 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		String userProfile = "";
 		//Navigate to people tab
 		for(String users: user){
-			driver.navigate().refresh();
+			//driver.navigate().refresh();
 			roleBasedLoginPage.clickPeopleTab();
 			roleBasedLoginPage.sendKeysToName(users);
 			 commonUtil.waitForElementUsingFluentWait(By.linkText(users)).click();

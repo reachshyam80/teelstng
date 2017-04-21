@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.coxautoinc.sfdc.utilities.CommonUtil;
+
 /**
  * Page Object for the Add Products page.
  */
@@ -18,7 +20,7 @@ public class AddProductsPage {
 
     private final AddProductsSelector addProductsSelector;
     private final WebDriver driver;
-
+    private final CommonUtil commonUtil;
     //~ Constructors ---------------------------------------------------------------------------------------------------
 
     /**
@@ -29,6 +31,7 @@ public class AddProductsPage {
     public AddProductsPage(WebDriver driver) {
         this.driver = driver;
         this.addProductsSelector = new AddProductsSelector();
+        this.commonUtil = new CommonUtil(driver);
     }
 
     //~ Methods --------------------------------------------------------------------------------------------------------
@@ -52,8 +55,8 @@ public class AddProductsPage {
      */
     public void sendKeysToProductNetBillableAmountInputByProductName(String productName, String input) {
         logger.info("Entering Product Net Billable Amount value: '{}' for Product: '{}'", input, productName);
-        driver.findElement(addProductsSelector.getProductNetBillableAmountInputByProductName(productName)).clear();
-        driver.findElement(addProductsSelector.getProductNetBillableAmountInputByProductName(productName)).sendKeys(
+        commonUtil.waitForElementToBeVisible(addProductsSelector.getProductNetBillableAmountInputByProductName(productName)).clear();
+        commonUtil.waitForElementToBeVisible(addProductsSelector.getProductNetBillableAmountInputByProductName(productName)).sendKeys(
             input);
     }
 
@@ -65,7 +68,7 @@ public class AddProductsPage {
      */
     public void sendKeysToQuantityInputByProductName(String productName, String input) {
         logger.info("Entering Quantity value: '{}' for Product: '{}'", input, productName);
-        driver.findElement(addProductsSelector.getQuantityInputByProductName(productName)).clear();
-        driver.findElement(addProductsSelector.getQuantityInputByProductName(productName)).sendKeys(input);
+        commonUtil.waitForElementToBeVisible(addProductsSelector.getQuantityInputByProductName(productName)).clear();
+        commonUtil.waitForElementToBeVisible(addProductsSelector.getQuantityInputByProductName(productName)).sendKeys(input);
     }
 }

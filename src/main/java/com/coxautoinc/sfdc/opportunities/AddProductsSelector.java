@@ -17,7 +17,7 @@ class AddProductsSelector {
      * @return By object with the xpath for the Product Net Billable Amount input field for the specified product.
      */
     By getProductNetBillableAmountInputByProductName(String productName) {
-        return By.xpath("//*[contains(text(),'" + productName + "')]/following-sibling::td[2]/input");
+        return By.xpath("//*[contains(text(),'" + productName + "')]/following-sibling::td[3]/input");
     }
 
     /**
