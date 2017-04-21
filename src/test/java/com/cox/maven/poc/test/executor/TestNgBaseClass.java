@@ -210,7 +210,7 @@ public class TestNgBaseClass {
      *
      * @throws IOException on error
      */
-    //@AfterClass(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void teardown() throws IOException {
         // This takes a screenshot of the 'test(s)' when the @AfterClass is called. This is useful when using the
         // Selenium Grid.
