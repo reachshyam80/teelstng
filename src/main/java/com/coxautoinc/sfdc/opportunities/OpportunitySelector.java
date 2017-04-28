@@ -116,7 +116,7 @@ class OpportunitySelector {
         closeDate = By.id("opp9");
         selectType = By.id("opp5");
         selectStage = By.id("opp11");
-        saveBtn = By.name("save_new");
+        saveBtn = By.name("save");
         addPartner = By.name("newPartner");
         addCompetitor = By.name("newComp");
         newNoteBtn = By.name("newNote");
