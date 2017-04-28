@@ -119,6 +119,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	@Test(dependsOnMethods = "createOpportunities")
 	public void selectProducts() {
 		logger.info("Entering test method: selectProducts");
+		opportunityPage.clickAddProductBtn();
 		ProductSelectionPage productSelectionPage = new ProductSelectionPage(driver);
 
 		// Filter by first letter of product one.
