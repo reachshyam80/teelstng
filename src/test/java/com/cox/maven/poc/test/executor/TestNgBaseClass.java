@@ -46,7 +46,7 @@ public class TestNgBaseClass {
 	private static final DesiredCapabilities capability = new DesiredCapabilities();
 	private Map<String, String> testParameters;
 	private final ArrayList<ArrayList<String>> systemParameters;
-	private String region="QA";
+	String region="QA";
 
 	/**
 	 * Constructor
@@ -68,6 +68,9 @@ public class TestNgBaseClass {
 		if (System.getProperty("region") != null) {
 	        region = System.getProperty("region");
 	    }
+		if(region.equalsIgnoreCase("QA")){
+			
+		}
 		System.out.println("System.getProperty"+System.getProperty("region"));
 	}
 

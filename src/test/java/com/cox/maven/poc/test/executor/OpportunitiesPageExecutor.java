@@ -58,6 +58,11 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	@Parameters({ "excelSheetName", "excelFileName" })
 	public void beforeTest(String sheetName, String excelFileName) {
 		this.excelSheetName = sheetName;
+		if(region.equalsIgnoreCase("QA")){
+			excelFileName = "SalesforceUseCaseTestDataQA";
+		}else if(region.equalsIgnoreCase("preprod")){
+			excelFileName = "SalesforceUseCaseTestDataPP";
+		}
 		this.excelFilePath = System.getProperty("user.dir") + "/src/test/resources/testdata/" + excelFileName + ".xlsx";
 		this.opportunityPage = new OpportunityPage(driver);
 		this.addProductsPage = new AddProductsPage(driver);
