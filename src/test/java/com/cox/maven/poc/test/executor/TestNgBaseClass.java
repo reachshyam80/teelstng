@@ -46,6 +46,7 @@ public class TestNgBaseClass {
 	private static final DesiredCapabilities capability = new DesiredCapabilities();
 	private Map<String, String> testParameters;
 	private final ArrayList<ArrayList<String>> systemParameters;
+	private String region="QA";
 
 	/**
 	 * Constructor
@@ -64,6 +65,10 @@ public class TestNgBaseClass {
 	public void setUp(String browserName) throws Exception {
 		setupDriver(browserName);
 		baseUrl = capability.getCapability("baseUrl").toString();
+		if (System.getProperty("region") != null) {
+	        region = System.getProperty("region");
+	    }
+		System.out.println("System.getProperty"+System.getProperty("region"));
 	}
 
 	/**
