@@ -47,7 +47,7 @@ public class TestNgBaseClass {
 	private Map<String, String> testParameters;
 	private final ArrayList<ArrayList<String>> systemParameters;
 	String region="QA";
-
+	String excelFileName = "SalesforceUseCaseTestDataQA";
 	/**
 	 * Constructor
 	 * 
@@ -69,7 +69,9 @@ public class TestNgBaseClass {
 	        region = System.getProperty("region");
 	    }
 		if(region.equalsIgnoreCase("QA")){
-			
+			excelFileName = "SalesforceUseCaseTestDataQA";
+		}else if(region.equalsIgnoreCase("preprod")){
+			excelFileName = "SalesforceUseCaseTestDataPP";
 		}
 		System.out.println("System.getProperty"+System.getProperty("region"));
 	}

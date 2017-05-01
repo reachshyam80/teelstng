@@ -4,7 +4,7 @@
 		<parameter name="baseUrl" value="https://test.salesforce.com" />
 		<parameter name="local" value="false" />
 		<parameter name="browserName" value="chrome" />
-		<parameter name="excelFileName" value="SalesforceUseCaseTestDataQA" />
+		<parameter name="excelFileName" value="SalesforceUseCaseTestData" />
 		<parameter name="excelSheetName" value="Create Opportunity" />
 
 		<!-- Used to point to a Selenium Grid Hub -->
@@ -34,7 +34,7 @@
 		<parameter name="baseUrl" value="https://test.salesforce.com" />
 		<parameter name="local" value="false" />
 		<parameter name="browserName" value="chrome" />
-		<parameter name="excelFileName" value="SalesforceUseCaseTestDataQA" />
+		<parameter name="excelFileName" value="SalesforceUseCaseTestData" />
 		<parameter name="excelSheetName" value="Login Roles" />
 		<parameter name="loginExcelSheetName" value="Login Details" />
 

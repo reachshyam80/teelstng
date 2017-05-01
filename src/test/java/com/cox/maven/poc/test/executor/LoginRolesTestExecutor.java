@@ -47,8 +47,8 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 	 * @throws Exception 
 	 */
 	@BeforeClass
-	@Parameters({ "excelSheetName", "excelFileName","loginExcelSheetName" })
-	public void beforeTest(String sheetName, String excelFileName, String loginSheetName) throws Exception {
+	@Parameters({ "excelSheetName","loginExcelSheetName" })
+	public void beforeTest(String sheetName, String loginSheetName) throws Exception {
 		this.commonUtil = new CommonUtil(driver);
 		this.roleBasedLoginPage = new RoleBasedLoginPage(driver);
 		this.roleBasedLoginSelector = new RoleBasedLoginSelector();
