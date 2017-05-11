@@ -25,6 +25,10 @@ class OpportunitySelector {
     private By addCompetitor;
     private By newNoteBtn;
     private By addAccntPopup;
+    private By globalSearchTextBox;
+    private By globalSearchButton;
+    private By newOpptyBtn;
+    
 
     //~ Constructors ---------------------------------------------------------------------------------------------------
 
@@ -101,6 +105,18 @@ class OpportunitySelector {
 		return addAccntPopup;
 	}
 
+	public By getGlobalSearchTextBox() {
+		return globalSearchTextBox;
+	}
+
+	public By getGlobalSearchButton() {
+		return globalSearchButton;
+	}
+
+	public By getNewOpptyBtn() {
+		return newOpptyBtn;
+	}
+
 	/**
      * Method to initialize all selector variables.
      */
@@ -121,5 +137,8 @@ class OpportunitySelector {
         addCompetitor = By.name("newComp");
         newNoteBtn = By.name("newNote");
         addAccntPopup = By.id("opp4_lkwgt");
+        globalSearchTextBox= By.id("phSearchInput");
+        globalSearchButton = By.id("phSearchButton");
+        newOpptyBtn = By.name("newOpp");
     }
 }

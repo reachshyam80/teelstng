@@ -181,5 +181,21 @@ public class OpportunityPage {
     public void clickAccntNamePopup(){
     	commonUtil.waitForElementToBeClickable(opportunitySelector.getAddAccntPopup()).click();
     }
+    
+    public void sendKeysToGlobalSearch(String accntName){
+    	logger.info("Entering sendKeysToGlobalSearch", accntName);
+        //commonUtil.waitForElementToBeVisible(homeSelector.getSearchInput()).clear();
+        commonUtil.waitForElementToBeVisible(opportunitySelector.getGlobalSearchTextBox()).sendKeys(accntName);
+    }
+    
+    public void clickGlobalSearchBtn(){
+    	commonUtil.waitForElementToBeClickable(opportunitySelector.getGlobalSearchButton()).click();
+    }
+    
+    public void clickNewOpptyBtn(){
+    	commonUtil.waitForElementToBeClickable(opportunitySelector.getNewOpptyBtn()).click();
+    }
+    
+    
 
 }

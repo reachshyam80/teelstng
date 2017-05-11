@@ -101,8 +101,12 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 */
 	@Test(dependsOnMethods = "login")
 	public void createOpportunities() throws InterruptedException {
-		opportunityPage.clickOpportunitiesTab();
-		opportunityPage.newOppbtn();
+		//opportunityPage.clickOpportunitiesTab();
+		//opportunityPage.newOppbtn();
+		opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
+		opportunityPage.clickGlobalSearchBtn();
+		commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
+		opportunityPage.clickNewOpptyBtn();
 		opportunityPage.selectRcdTyp(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
 		opportunityPage.sendKeysToOppName(opportunityName);
