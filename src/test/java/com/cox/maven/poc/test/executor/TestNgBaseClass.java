@@ -30,6 +30,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import com.coxautoinc.sfdc.login.LoginPage;
+
 /**
  * @author asreekanta
  *
@@ -74,6 +76,19 @@ public class TestNgBaseClass {
 			excelFileName = "SalesforceUseCaseTestDataPP";
 		}
 		System.out.println("System.getProperty"+System.getProperty("region"));
+	}
+	
+	/**
+	 * This common login method can be called by all test modules
+	 */
+	public void login(String userName, String password){
+		logger.info("Entering test method: verifyLoginToSalesForce");
+		LoginPage loginPage = new LoginPage(driver);
+		logger.info("Navigating to url: {}", baseUrl);
+		driver.get(baseUrl);
+		loginPage.loginToSalesForce(userName, password);
+
+		logger.info("Exiting test method: verifyLoginToSalesForce");
 	}
 
 	/**

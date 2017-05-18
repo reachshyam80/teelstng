@@ -69,6 +69,7 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		super.login(userName, password);
 		//Connection con = DriverManager.getConnection("jdbc:oracle:thin://qadbmdm1:1521/QAMDM1","api","soupqa");
 		//Class.forName("oracle.jdbc.driver.­OracleDriver");
 		//Statement stmt = con.createStatement();	
@@ -77,7 +78,7 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 	/**
 	 * Test to verify that a user can successfully log in to SFDC
 	 */
-	@Test
+	//@Test
 	public void login() {
 		logger.info("Entering test method: verifyLoginToSalesForce");
 		LoginPage loginPage = new LoginPage(driver);
@@ -91,7 +92,7 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 	/**
 	 * Test to verify if the BU search button/link is present for different user roles
 	 */
-	@Test(dependsOnMethods = "login",retryAnalyzer = com.coxautoinc.sfdc.utilities.TestNGRetry.class)
+	@Test(retryAnalyzer = com.coxautoinc.sfdc.utilities.TestNGRetry.class)
 	public void roleBasedLogin(){
 		String userRole = "";
 		String userProfile = "";

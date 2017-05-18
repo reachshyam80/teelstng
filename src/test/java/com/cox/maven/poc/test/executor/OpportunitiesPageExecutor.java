@@ -1,6 +1,8 @@
 package com.cox.maven.poc.test.executor;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -78,20 +80,22 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		this.password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
 		productThreeName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Name");
+		super.login(userName, password);
 	}
 
 	/**
 	 * Test to verify that a user can successfully log in to SFDC
 	 */
-	@Test
+	//@Test
 	public void login() {
-		logger.info("Entering test method: verifyLoginToSalesForce");
-		LoginPage loginPage = new LoginPage(driver);
-		logger.info("Navigating to url: {}", baseUrl);
-		driver.get(baseUrl);
-		loginPage.loginToSalesForce(userName, password);
+		//logger.info("Entering test method: verifyLoginToSalesForce");
+		//LoginPage loginPage = new LoginPage(driver);
+		//logger.info("Navigating to url: {}", baseUrl);
+		//driver.get(baseUrl);
+		//loginPage.loginToSalesForce(userName, password);
 
-		logger.info("Exiting test method: verifyLoginToSalesForce");
+		//logger.info("Exiting test method: verifyLoginToSalesForce");
+		
 
 	}
 
@@ -99,23 +103,30 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 * Test to verify that a user can create an opportunity
 	 * @throws InterruptedException 
 	 */
-	@Test(dependsOnMethods = "login")
+	@Test
 	public void createOpportunities() throws InterruptedException {
-		opportunityPage.clickOpportunitiesTab();
-		opportunityPage.newOppbtn();
-		//opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
-		//opportunityPage.clickGlobalSearchBtn();
-		//commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
-		//opportunityPage.clickNewOpptyBtn();
+    	Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        System.out.println( sdf.format(cal.getTime()) );
+		//opportunityPage.clickOpportunitiesTab();
+		//opportunityPage.newOppbtn();
+		opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
+		opportunityPage.clickGlobalSearchBtn();
+		commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
+		opportunityPage.clickNewOpptyBtn();
 		opportunityPage.selectRcdTyp(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
-		opportunityPage.sendKeysToOppName(opportunityName);
-		opportunityPage.clickAccntNamePopup();
-		opportunityPage.selectAccntName(accountName);
-		opportunityPage.sendKeysToEndDate(closeDate);
+		//opportunityPage.sendKeysToOppName(opportunityName);
+		//opportunityPage.clickAccntNamePopup();
+		//opportunityPage.selectAccntName(accountName);
+		opportunityPage.sendKeysToEndDate(sdf.format(cal.getTime()));
 		opportunityPage.selectType(oppType);
-		opportunityPage.selectStage(oppStage);
-		opportunityPage.saveOpportunity();
+		//opportunityPage.selectStage(oppStage);
+		opportunityPage.sendKeysToAmount("10");
+		opportunityPage.sendKeysToDesc("Test Desc");
+		opportunityPage.continueoppcreate();
+		opportunityPage.clickNavigateToOppty();
+		//opportunityPage.saveOpportunity();
 	}
 
 	/**
@@ -284,7 +295,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 */
 	@AfterTest
 	public void afterTest() throws IOException {
-		driver.quit();
+		//driver.quit();
 	}
 
 }

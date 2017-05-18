@@ -1,5 +1,8 @@
 package com.coxautoinc.sfdc.opportunities;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.openqa.selenium.By;
 
 /**
@@ -28,6 +31,9 @@ class OpportunitySelector {
     private By globalSearchTextBox;
     private By globalSearchButton;
     private By newOpptyBtn;
+    private By amountTxt;
+    private By descTxt;
+    private By navigateToOppty;
     
 
     //~ Constructors ---------------------------------------------------------------------------------------------------
@@ -117,6 +123,18 @@ class OpportunitySelector {
 		return newOpptyBtn;
 	}
 
+	public By getAmountTxt() {
+		return amountTxt;
+	}
+
+	public By getDescTxt() {
+		return descTxt;
+	}
+
+	public By getNavigateToOppty() {
+		return navigateToOppty;
+	}
+
 	/**
      * Method to initialize all selector variables.
      */
@@ -125,12 +143,14 @@ class OpportunitySelector {
         newQuoteBtn = By.xpath("//input[@name='newQuote']");
         oppTabNav = By.xpath("//a[@title = 'Opportunities Tab']");
         newbtn = By.name("new");
-        selectRcdTyp = By.id("p3");
-        continueBtn = By.xpath("//input[@value = 'Continue']");
+        //selectRcdTyp = By.id("p3");
+        selectRcdTyp = By.xpath("//input[@value='At_Risk']");
+        //continueBtn = By.xpath("//input[@value = 'Continue']");
+        continueBtn = By.xpath("//input[@value = 'Next']");
         opportunityNameTxt = By.id("opp3");
         accountNameTxt = By.id("opp4");
-        closeDate = By.id("opp9");
-        selectType = By.id("opp5");
+        closeDate = By.id("p:i:i:f:pb:d:AtRiskClose_Date.input");
+        selectType = By.id("p:i:i:f:pb:d:Type.input");
         selectStage = By.id("opp11");
         saveBtn = By.name("save");
         addPartner = By.name("newPartner");
@@ -139,6 +159,11 @@ class OpportunitySelector {
         addAccntPopup = By.id("opp4_lkwgt");
         globalSearchTextBox= By.id("phSearchInput");
         globalSearchButton = By.id("phSearchButton");
-        newOpptyBtn = By.name("newOpp");
+        newOpptyBtn = By.name("new_flow_opportunity");
+        amountTxt = By.id("p:i:i:f:pb:d:AtRiskAmount.input");
+        descTxt = By.id("p:i:i:f:pb:d:AtRiskDescription.input");
+        navigateToOppty = By.linkText("here.");
     }
+    
+
 }

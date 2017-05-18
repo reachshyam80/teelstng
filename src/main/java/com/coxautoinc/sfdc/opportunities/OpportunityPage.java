@@ -125,7 +125,7 @@ public class OpportunityPage {
     
     public void selectRcdTyp(String recType){
     	logger.info("Entering selectRcdTyp");
-    	commonUtil.waitForElementToBeClickable(opportunitySelector.getSelectRcdTyp()).sendKeys(recType);
+    	commonUtil.waitForElementToBeClickable(opportunitySelector.getSelectRcdTyp()).click();
     }
     
     public void continueoppcreate(){
@@ -197,5 +197,19 @@ public class OpportunityPage {
     }
     
     
-
+    public void sendKeysToAmount(String amount){
+    	logger.info("Entering sendKeysToAmount", amount);
+        //commonUtil.waitForElementToBeVisible(homeSelector.getSearchInput()).clear();
+        commonUtil.waitForElementToBeVisible(opportunitySelector.getAmountTxt()).sendKeys(amount);
+    }
+    
+    public void sendKeysToDesc(String desc){
+    	logger.info("Entering sendKeysToDesc", desc);
+        //commonUtil.waitForElementToBeVisible(homeSelector.getSearchInput()).clear();
+        commonUtil.waitForElementToBeVisible(opportunitySelector.getDescTxt()).sendKeys(desc);
+    }
+    
+    public void clickNavigateToOppty(){
+    	commonUtil.waitForElementToBeClickable(opportunitySelector.getNavigateToOppty()).click();
+    }
 }
