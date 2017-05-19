@@ -80,6 +80,10 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		this.password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
 		productThreeName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Name");
+		if(region.equalsIgnoreCase("preprod")){
+			driver.close();
+			driver.quit();
+		}
 		super.login(userName, password);
 	}
 
