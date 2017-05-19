@@ -16,6 +16,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -194,9 +195,18 @@ public class TestNgBaseClass {
 			if (browserName.equalsIgnoreCase("firefox")) {
 				capability.setCapability("browserName", "firefox");
 			} else if (browserName.equalsIgnoreCase("chrome")) {
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--start-maximized");
+
+				Map<String, Object> prefs = new HashMap<String, Object>();
+				prefs.put("credentials_enable_service", false);
+				prefs.put("profile.password_manager_enabled", false);
+				options.setExperimentalOption("prefs", prefs);
+				capability.setCapability(ChromeOptions.CAPABILITY, options);
 				capability.setCapability("browserName", "chrome");
 			}
 			capability.setCapability("acceptSslCerts", true);
+			
 			try {
 				driver = new RemoteWebDriver(new URL(capability.getCapability("remoteUrl").toString()), capability);
 			} catch (org.openqa.selenium.WebDriverException e) {
