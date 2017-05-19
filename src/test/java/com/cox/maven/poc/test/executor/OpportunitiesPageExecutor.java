@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -57,10 +58,10 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 * Method to initialize test variables.
 	 */
 	@BeforeClass
-	@Parameters({ "excelSheetName"})
+	@Parameters({ "excelSheetName" })
 	public void beforeTest(String sheetName) {
 		this.excelSheetName = sheetName;
-		
+
 		this.excelFilePath = System.getProperty("user.dir") + "/src/test/resources/testdata/" + excelFileName + ".xlsx";
 		this.opportunityPage = new OpportunityPage(driver);
 		this.addProductsPage = new AddProductsPage(driver);
@@ -80,54 +81,57 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		this.password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
 		productThreeName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Name");
+		if (region.equalsIgnoreCase("preprod"))
+			throw new SkipException("Test Not Required for Preprod");
 		super.login(userName, password);
 	}
 
 	/**
 	 * Test to verify that a user can successfully log in to SFDC
 	 */
-	//@Test
+	// @Test
 	public void login() {
-		//logger.info("Entering test method: verifyLoginToSalesForce");
-		//LoginPage loginPage = new LoginPage(driver);
-		//logger.info("Navigating to url: {}", baseUrl);
-		//driver.get(baseUrl);
-		//loginPage.loginToSalesForce(userName, password);
+		// logger.info("Entering test method: verifyLoginToSalesForce");
+		// LoginPage loginPage = new LoginPage(driver);
+		// logger.info("Navigating to url: {}", baseUrl);
+		// driver.get(baseUrl);
+		// loginPage.loginToSalesForce(userName, password);
 
-		//logger.info("Exiting test method: verifyLoginToSalesForce");
-		
+		// logger.info("Exiting test method: verifyLoginToSalesForce");
 
 	}
 
 	/**
 	 * Test to verify that a user can create an opportunity
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	@Test
 	public void createOpportunities() throws InterruptedException {
-		
-    	Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        System.out.println( sdf.format(cal.getTime()) );
-		//opportunityPage.clickOpportunitiesTab();
-		//opportunityPage.newOppbtn();
+
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		System.out.println(sdf.format(cal.getTime()));
+		// opportunityPage.clickOpportunitiesTab();
+		// opportunityPage.newOppbtn();
 		opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
 		opportunityPage.clickGlobalSearchBtn();
 		commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
 		opportunityPage.clickNewOpptyBtn();
-		opportunityPage.selectRcdTyp(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
+		opportunityPage.selectRcdTyp(
+				commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
-		//opportunityPage.sendKeysToOppName(opportunityName);
-		//opportunityPage.clickAccntNamePopup();
-		//opportunityPage.selectAccntName(accountName);
+		// opportunityPage.sendKeysToOppName(opportunityName);
+		// opportunityPage.clickAccntNamePopup();
+		// opportunityPage.selectAccntName(accountName);
 		opportunityPage.sendKeysToEndDate(sdf.format(cal.getTime()));
 		opportunityPage.selectType(oppType);
-		//opportunityPage.selectStage(oppStage);
+		// opportunityPage.selectStage(oppStage);
 		opportunityPage.sendKeysToAmount("10");
 		opportunityPage.sendKeysToDesc("Test Desc");
 		opportunityPage.continueoppcreate();
 		opportunityPage.clickNavigateToOppty();
-		//opportunityPage.saveOpportunity();
+		// opportunityPage.saveOpportunity();
 	}
 
 	/**
@@ -176,10 +180,14 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		logger.info("Entering test method: addProducts");
 		wait.until(ExpectedConditions
 				.elementToBeClickable(By.xpath("(//input[@value='Save'] | //input[@title='Save'])[1]")));
-		addProductsPage.sendKeysToQuantityInputByProductName(productOneName, (commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product1 Quantity")));
-		addProductsPage.sendKeysToProductNetBillableAmountInputByProductName(productOneName, (commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product1 Sales Price")));
-		addProductsPage.sendKeysToQuantityInputByProductName(productTwoName, (commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product2 Quantity")));
-		addProductsPage.sendKeysToProductNetBillableAmountInputByProductName(productTwoName, (commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product2 Sales Price")));
+		addProductsPage.sendKeysToQuantityInputByProductName(productOneName,
+				(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product1 Quantity")));
+		addProductsPage.sendKeysToProductNetBillableAmountInputByProductName(productOneName,
+				(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product1 Sales Price")));
+		addProductsPage.sendKeysToQuantityInputByProductName(productTwoName,
+				(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product2 Quantity")));
+		addProductsPage.sendKeysToProductNetBillableAmountInputByProductName(productTwoName,
+				(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product2 Sales Price")));
 		// Click Save.
 		commonPage.clickSaveBtn();
 
@@ -213,8 +221,10 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		productSelectionPage.clickSelectBtn();
 		wait.until(ExpectedConditions
 				.elementToBeClickable(By.xpath("(//input[@value='Save'] | //input[@title='Save'])[1]")));
-		addProductsPage.sendKeysToQuantityInputByProductName(productThreeName, (commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Quantity")));
-		addProductsPage.sendKeysToProductNetBillableAmountInputByProductName(productThreeName, (commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Sales Price")));
+		addProductsPage.sendKeysToQuantityInputByProductName(productThreeName,
+				(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Quantity")));
+		addProductsPage.sendKeysToProductNetBillableAmountInputByProductName(productThreeName,
+				(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Sales Price")));
 		// Click Save.
 		commonPage.clickSaveBtn();
 		// Assert that the Quantity input fields are displayed to verify that we
@@ -238,9 +248,12 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("newComp")));
 		opportunityPage.addCompetitorToOpp();
 
-		addCompetitor.sendKeysToCompName(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Competitor Name"));
-		addCompetitor.sendKeysToCompStrength(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Competitor Strength"));
-		addCompetitor.sendKeysToCompWeakness(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Competitor Weakness"));
+		addCompetitor.sendKeysToCompName(
+				commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Competitor Name"));
+		addCompetitor.sendKeysToCompStrength(
+				commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Competitor Strength"));
+		addCompetitor.sendKeysToCompWeakness(
+				commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Competitor Weakness"));
 		commonPage.clickSaveBtn();
 		logger.info("Entering test method: addCompetitor");
 
@@ -254,8 +267,10 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		logger.info("Entering test method: addPartner");
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("newPartner")));
 		opportunityPage.addPartnerToOpp();
-		addPartnerPage.sendKeysToPartnerName(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Partner Name"));
-		addPartnerPage.sendKeysToPartRole(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Partner Role"));
+		addPartnerPage.sendKeysToPartnerName(
+				commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Partner Name"));
+		addPartnerPage
+				.sendKeysToPartRole(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Partner Role"));
 		commonPage.clickSaveBtn();
 
 		logger.info("Entering test method: addPartner");
@@ -269,7 +284,8 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		logger.info("Entering test method: addNotes");
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("newNote")));
 		opportunityPage.addNotesToOpp();
-		addNotesPage.sendKeysToNoteTitle(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Notes Title"));
+		addNotesPage
+				.sendKeysToNoteTitle(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Notes Title"));
 		addNotesPage.sendKeysToNoteBody(commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Notes body"));
 		commonPage.clickSaveBtn();
 		logger.info("Entering test method: addNotes");
@@ -292,11 +308,11 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	}
 
 	/**
-	 * Method executes after all the tests are complete. 
+	 * Method executes after all the tests are complete.
 	 */
 	@AfterTest
 	public void afterTest() throws IOException {
-		//driver.quit();
+		// driver.quit();
 	}
 
 }
