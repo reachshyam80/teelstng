@@ -80,10 +80,6 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		this.password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
 		productThreeName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Name");
-		if(region.equalsIgnoreCase("preprod")){
-			driver.close();
-			driver.quit();
-		}
 		super.login(userName, password);
 	}
 
@@ -109,6 +105,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 */
 	@Test
 	public void createOpportunities() throws InterruptedException {
+		
     	Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println( sdf.format(cal.getTime()) );
