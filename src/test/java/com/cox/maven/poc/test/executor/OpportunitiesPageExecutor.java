@@ -108,8 +108,8 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
     	Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println( sdf.format(cal.getTime()) );
-		//opportunityPage.clickOpportunitiesTab();
-		//opportunityPage.newOppbtn();
+		opportunityPage.clickOpportunitiesTab();
+		opportunityPage.newOppbtn();
 		opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
 		opportunityPage.clickGlobalSearchBtn();
 		commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
