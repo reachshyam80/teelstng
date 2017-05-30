@@ -315,9 +315,9 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Method executes after all the tests are complete.
 	 */
-	@AfterClass(dependsOnMethods = "editProduct",alwaysRun = false)
+	@AfterClass(alwaysRun = false)
 	public void cleanUp() {
-		if(!region.equalsIgnoreCase("preprod")){
+		if((!region.equalsIgnoreCase("preprod")) && (null!= opportunityName)){
 		 logger.info("Entering test method: cleanUp");
 
 	        // Search for the dealer.
