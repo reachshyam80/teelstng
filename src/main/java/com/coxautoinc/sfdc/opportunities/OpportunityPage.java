@@ -1,9 +1,11 @@
 package com.coxautoinc.sfdc.opportunities;
 
+import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -125,7 +127,7 @@ public class OpportunityPage {
     
     public void selectRcdTyp(String recType){
     	logger.info("Entering selectRcdTyp");
-    	commonUtil.waitForElementToBeClickable(opportunitySelector.getSelectRcdTyp()).click();
+    	commonUtil.waitForElementUsingFluentWait(opportunitySelector.getSelectRcdTyp()).click();
     }
     
     public void continueoppcreate(){
@@ -193,7 +195,7 @@ public class OpportunityPage {
     }
     
     public void clickNewOpptyBtn(){
-    	commonUtil.waitForElementToBeClickable(opportunitySelector.getNewOpptyBtn()).click();
+    	commonUtil.waitForElementUsingFluentWait(opportunitySelector.getNewOpptyBtn()).click();
     }
     
     
@@ -211,5 +213,28 @@ public class OpportunityPage {
     
     public void clickNavigateToOppty(){
     	commonUtil.waitForElementToBeClickable(opportunitySelector.getNavigateToOppty()).click();
+    }
+    
+    /**
+     * Method to delete visible opportunities with the specified opportunity name.
+     *
+     * @param opportunityName in value.
+     */
+    public void clickDeleteLinkForOpportunitiesByName(String opportunityName) {
+        List<WebElement> webElements;
+        int numWebElements = driver.findElements(opportunitySelector.getDeleteOpptyLink(opportunityName)).size();
+        for (int i = 0; i < numWebElements; i++) {
+            logger.info("Deleting test Opportunities with name: '{}'", opportunityName);
+            webElements = driver.findElements(opportunitySelector.getDeleteOpptyLink(opportunityName));
+
+            // Click the top delete link
+            webElements.get(0).click();
+
+            // Click Ok
+            driver.switchTo().alert().accept();
+
+            // Wait for the page to reload
+            //commonUtil.waitForElementToBeClickable(opportunitySelector.getNewOpportunityBtn());
+        }
     }
 }

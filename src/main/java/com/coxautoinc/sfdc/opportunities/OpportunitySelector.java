@@ -34,6 +34,7 @@ class OpportunitySelector {
     private By amountTxt;
     private By descTxt;
     private By navigateToOppty;
+    private By deleteOpptyLink;
     
 
     //~ Constructors ---------------------------------------------------------------------------------------------------
@@ -135,6 +136,10 @@ class OpportunitySelector {
 		return navigateToOppty;
 	}
 
+	public By getDeleteOpptyLink(String opportunityName) {
+		return By.xpath("//a[contains(text(),'" + opportunityName + "')]/ancestor::tr/td/a[text()='Del']");
+	}
+
 	/**
      * Method to initialize all selector variables.
      */
@@ -144,7 +149,9 @@ class OpportunitySelector {
         oppTabNav = By.xpath("//a[@title = 'Opportunities Tab']");
         newbtn = By.name("new");
         //selectRcdTyp = By.id("p3");
-        selectRcdTyp = By.xpath("//input[@value='At_Risk']");
+        //selectRcdTyp = By.xpath("//input[@value='At_Risk']");
+        selectRcdTyp = By.xpath("//*[@id='p:i:i:f:pb:d:Select_Opportunity_Record_Type.At_Risk.radio']");
+        //selectRcdTyp = By.id("p:i:i:f:pb:d:Select_Opportunity_Record_Type.At_Risk.radio");
         //continueBtn = By.xpath("//input[@value = 'Continue']");
         continueBtn = By.xpath("//input[@value = 'Next']");
         opportunityNameTxt = By.id("opp3");
@@ -159,10 +166,11 @@ class OpportunitySelector {
         addAccntPopup = By.id("opp4_lkwgt");
         globalSearchTextBox= By.id("phSearchInput");
         globalSearchButton = By.id("phSearchButton");
-        newOpptyBtn = By.name("new_flow_opportunity");
+        newOpptyBtn = By.name("new_flow_opportunity2");
         amountTxt = By.id("p:i:i:f:pb:d:AtRiskAmount.input");
         descTxt = By.id("p:i:i:f:pb:d:AtRiskDescription.input");
         navigateToOppty = By.linkText("here.");
+        
     }
     
 

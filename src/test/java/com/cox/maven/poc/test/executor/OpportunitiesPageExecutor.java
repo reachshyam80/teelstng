@@ -1,21 +1,20 @@
 package com.cox.maven.poc.test.executor;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.SkipException;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.coxautoinc.sfdc.common.CommonPage;
-import com.coxautoinc.sfdc.login.LoginPage;
 import com.coxautoinc.sfdc.opportunities.AddCompetitorPage;
 import com.coxautoinc.sfdc.opportunities.AddNotesPage;
 import com.coxautoinc.sfdc.opportunities.AddPartnerPage;
@@ -72,7 +71,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.commonUtil = new CommonUtil(driver);
 		this.productOneName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product1 Name");
 		this.productTwoName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product2 Name");
-		this.opportunityName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Opportunity Name");
+		//this.opportunityName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Opportunity Name");
 		this.accountName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Account Name");
 		this.closeDate = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Close Date");
 		this.oppType = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Opp Type");
@@ -107,7 +106,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 * @throws InterruptedException
 	 */
 	@Test
-	public void createOpportunities() throws InterruptedException {
+	public void createOpportunities(){
 
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -118,8 +117,13 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		opportunityPage.clickGlobalSearchBtn();
 		commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
 		opportunityPage.clickNewOpptyBtn();
-		opportunityPage.selectRcdTyp(
-				commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
+		//driver.switchTo().frame(commonUtil.waitForElementUsingFluentWait(By.id("p:i:i:f:pb")));
+		
+		//driver.switchTo().frame(commonUtil.waitForElementUsingFluentWait(By.xpath("//*[@id='Opportunity Creation Guided Flow']")));
+		WebElement iFrame= driver.findElement(By.tagName("iframe"));
+		driver.switchTo().frame(iFrame);
+		//opportunityPage.selectRcdTyp(
+				//commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
 		// opportunityPage.sendKeysToOppName(opportunityName);
 		// opportunityPage.clickAccntNamePopup();
@@ -131,6 +135,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		opportunityPage.sendKeysToDesc("Test Desc");
 		opportunityPage.continueoppcreate();
 		opportunityPage.clickNavigateToOppty();
+		opportunityName = driver.findElement(By.xpath(".//*[@id='opp3_ileinner']")).getText();
 		// opportunityPage.saveOpportunity();
 	}
 
@@ -310,9 +315,23 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Method executes after all the tests are complete.
 	 */
-	@AfterTest
-	public void afterTest() throws IOException {
-		// driver.quit();
+	@AfterClass(alwaysRun = true)
+	public void cleanUp() {
+		 logger.info("Entering test method: cleanUp");
+
+	        // Search for the dealer.
+		 	opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
+			opportunityPage.clickGlobalSearchBtn();
+
+	        // Click on the dealer from the results page.
+			commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
+
+	        // Find the recent opportunities with the entered test name "Java Test Products".
+	        //accountPage.clickDeleteLinkForOpportunitiesByName(commonUtil.getColumnDataFromExcel(excelFilePath,
+	                //excelSheetName, "Opportunity Dealer Interested Product"));
+			System.out.println("aaOpptyName"+opportunityName);
+	        opportunityPage.clickDeleteLinkForOpportunitiesByName(opportunityName);
+	        logger.info("Exiting test method: cleanUp");
 	}
 
 }
