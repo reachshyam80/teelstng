@@ -111,12 +111,12 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		System.out.println(sdf.format(cal.getTime()));
-		 opportunityPage.clickOpportunitiesTab();
-		 opportunityPage.newOppbtn();
-		//opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
-		//opportunityPage.clickGlobalSearchBtn();
-		//commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
-		//opportunityPage.clickNewOpptyBtn();
+		 //opportunityPage.clickOpportunitiesTab();
+		 //opportunityPage.newOppbtn();
+		opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
+		opportunityPage.clickGlobalSearchBtn();
+		commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
+		opportunityPage.clickNewOpptyBtn();
 		//driver.switchTo().frame(commonUtil.waitForElementUsingFluentWait(By.id("p:i:i:f:pb")));
 		
 		//driver.switchTo().frame(commonUtil.waitForElementUsingFluentWait(By.xpath("//*[@id='Opportunity Creation Guided Flow']")));
@@ -315,7 +315,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Method executes after all the tests are complete.
 	 */
-	@AfterClass(alwaysRun = true)
+	@AfterClass(alwaysRun = false)
 	public void cleanUp() {
 		if(!region.equalsIgnoreCase("preprod")){
 		 logger.info("Entering test method: cleanUp");
