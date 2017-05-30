@@ -317,6 +317,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	 */
 	@AfterClass(alwaysRun = true)
 	public void cleanUp() {
+		if(!region.equalsIgnoreCase("preprod")){
 		 logger.info("Entering test method: cleanUp");
 
 	        // Search for the dealer.
@@ -331,6 +332,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	                //excelSheetName, "Opportunity Dealer Interested Product"));
 			System.out.println("aaOpptyName"+opportunityName);
 	        opportunityPage.clickDeleteLinkForOpportunitiesByName(opportunityName);
+		}
 	        logger.info("Exiting test method: cleanUp");
 	}
 
