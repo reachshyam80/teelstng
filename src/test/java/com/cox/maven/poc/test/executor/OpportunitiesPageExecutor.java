@@ -71,7 +71,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.commonUtil = new CommonUtil(driver);
 		this.productOneName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product1 Name");
 		this.productTwoName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product2 Name");
-		//this.opportunityName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Opportunity Name");
+		this.opportunityName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Opportunity Name");
 		this.accountName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Account Name");
 		this.closeDate = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Close Date");
 		this.oppType = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Opp Type");
@@ -135,7 +135,8 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		opportunityPage.sendKeysToDesc("Test Desc");
 		opportunityPage.continueoppcreate();
 		opportunityPage.clickNavigateToOppty();
-		opportunityName = driver.findElement(By.xpath(".//*[@id='opp3_ileinner']")).getText();
+		//driver.switchTo().defaultContent();
+		//opportunityName = driver.findElement(By.xpath(".//*[@id='opp3_ileinner']")).getText();
 		// opportunityPage.saveOpportunity();
 	}
 
@@ -145,6 +146,9 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	@Test(dependsOnMethods = "createOpportunities")
 	public void selectProducts() {
 		logger.info("Entering test method: selectProducts");
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
 		opportunityPage.clickAddProductBtn();
 		ProductSelectionPage productSelectionPage = new ProductSelectionPage(driver);
 
@@ -315,7 +319,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Method executes after all the tests are complete.
 	 */
-	@AfterClass(alwaysRun = false)
+	//@AfterClass(alwaysRun = false)
 	public void cleanUp() {
 		if((!region.equalsIgnoreCase("preprod")) && (null!= opportunityName)){
 		 logger.info("Entering test method: cleanUp");
