@@ -319,7 +319,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Method executes after all the tests are complete.
 	 */
-	//@AfterClass(alwaysRun = false)
+	@AfterClass(alwaysRun = false)
 	public void cleanUp() {
 		if((!region.equalsIgnoreCase("preprod")) && (null!= opportunityName)){
 		 logger.info("Entering test method: cleanUp");
