@@ -125,7 +125,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		//opportunityPage.selectRcdTyp(
 				//commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
-		// opportunityPage.sendKeysToOppName(opportunityName);
+		 opportunityPage.sendKeysToOppName(opportunityName);
 		// opportunityPage.clickAccntNamePopup();
 		// opportunityPage.selectAccntName(accountName);
 		opportunityPage.sendKeysToEndDate(sdf.format(cal.getTime()));
