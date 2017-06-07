@@ -225,6 +225,7 @@ public class OpportunityPage {
         int numWebElements = driver.findElements(opportunitySelector.getDeleteOpptyLink(opportunityName)).size();
         for (int i = 0; i < numWebElements; i++) {
             logger.info("Deleting test Opportunities with name: '{}'", opportunityName);
+            driver.findElement(By.xpath(".//*[@id='0015B00000I9vRO_RelatedOpportunityList_body']/div/a[2]")).click();;
             webElements = driver.findElements(opportunitySelector.getDeleteOpptyLink(opportunityName));
 
             // Click the top delete link
