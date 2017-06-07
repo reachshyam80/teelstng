@@ -62,14 +62,14 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		user = exclData.get("User");
 		role = exclData.get("Role");
 		File directory = new File("Screenshots");
-		File tmpFolder = new File("tmp");
+		//File tmpFolder = new File("tmp");
 		try {
 			if(directory.exists()){
 				FileUtils.cleanDirectory(directory);
 			}
-			if(tmpFolder.exists()){
-				FileUtils.cleanDirectory(tmpFolder);
-			}
+			//if(tmpFolder.exists()){
+				//FileUtils.cleanDirectory(tmpFolder);
+			//}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
