@@ -120,8 +120,8 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		//driver.switchTo().frame(commonUtil.waitForElementUsingFluentWait(By.id("p:i:i:f:pb")));
 		
 		//driver.switchTo().frame(commonUtil.waitForElementUsingFluentWait(By.xpath("//*[@id='Opportunity Creation Guided Flow']")));
-		WebElement iFrame= driver.findElement(By.tagName("iframe"));
-		driver.switchTo().frame(iFrame);
+		//WebElement iFrame= driver.findElement(By.tagName("iframe"));
+		//driver.switchTo().frame(iFrame);
 		//opportunityPage.selectRcdTyp(
 				//commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
@@ -146,9 +146,9 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	@Test(dependsOnMethods = "createOpportunities")
 	public void selectProducts() {
 		logger.info("Entering test method: selectProducts");
-		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
-		}
+		//for(String winHandle : driver.getWindowHandles()){
+		   // driver.switchTo().window(winHandle);
+		//}
 		opportunityPage.clickAddProductBtn();
 		ProductSelectionPage productSelectionPage = new ProductSelectionPage(driver);
 
