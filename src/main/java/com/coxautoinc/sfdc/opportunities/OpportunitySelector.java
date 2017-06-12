@@ -156,8 +156,8 @@ class OpportunitySelector {
         continueBtn = By.xpath("//input[@value = 'Next']");
         opportunityNameTxt = By.id("j_id0:j_id1:i:f:pb:d:Opportunity_Name_At_Risk.input");
         accountNameTxt = By.id("opp4");
-        closeDate = By.id("p:i:i:f:pb:d:AtRiskClose_Date.input");
-        selectType = By.id("p:i:i:f:pb:d:Type.input");
+        closeDate = By.id("j_id0:j_id1:i:f:pb:d:AtRiskClose_Date.input");
+        selectType = By.id("j_id0:j_id1:i:f:pb:d:Type.input");
         selectStage = By.id("opp11");
         saveBtn = By.name("save");
         addPartner = By.name("newPartner");
@@ -167,8 +167,8 @@ class OpportunitySelector {
         globalSearchTextBox= By.id("phSearchInput");
         globalSearchButton = By.id("phSearchButton");
         newOpptyBtn = By.name("new_flow_opportunity2");
-        amountTxt = By.id("p:i:i:f:pb:d:AtRiskAmount.input");
-        descTxt = By.id("p:i:i:f:pb:d:AtRiskDescription.input");
+        amountTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskAmount.input");
+        descTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskDescription.input");
         navigateToOppty = By.linkText("here.");
         
     }
