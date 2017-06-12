@@ -154,7 +154,7 @@ class OpportunitySelector {
         //selectRcdTyp = By.id("p:i:i:f:pb:d:Select_Opportunity_Record_Type.At_Risk.radio");
         //continueBtn = By.xpath("//input[@value = 'Continue']");
         continueBtn = By.xpath("//input[@value = 'Next']");
-        opportunityNameTxt = By.id("p:i:i:f:pb:d:Opportunity_Name_At_Risk.input");
+        opportunityNameTxt = By.id("j_id0:j_id1:i:f:pb:d:Opportunity_Name_At_Risk.input");
         accountNameTxt = By.id("opp4");
         closeDate = By.id("p:i:i:f:pb:d:AtRiskClose_Date.input");
         selectType = By.id("p:i:i:f:pb:d:Type.input");
