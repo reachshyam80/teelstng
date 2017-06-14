@@ -169,7 +169,7 @@ class OpportunitySelector {
         newOpptyBtn = By.name("new_flow_opportunity2");
         amountTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskAmount.input");
         descTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskDescription.input");
-        navigateToOppty = By.linkText("here.");
+        navigateToOppty = By.linkText("here");
         
     }
     
