@@ -44,6 +44,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	private String oppStage;
 	private String userName;
 	private String password;
+	private String prodOfInt;
 
 	// private final String path;
 	// private static final DesiredCapabilities capability = new
@@ -80,6 +81,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		this.userName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Username");
 		this.password = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Password");
 		productThreeName = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Product3 Name");
+		prodOfInt = commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Products Of Interest");
 		if (region.equalsIgnoreCase("preprod"))
 			throw new SkipException("Test Not Required for Preprod");
 		super.login(userName, password);
@@ -125,18 +127,23 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		//opportunityPage.selectRcdTyp(
 				//commonUtil.getColumnDataFromExcel(excelFilePath, excelSheetName, "Record Type of new record"));
 		opportunityPage.continueoppcreate();
-		 opportunityPage.sendKeysToOppName(opportunityName);
+		opportunityPage.sendKeysToProdOfInt(prodOfInt);
+		 //opportunityPage.sendKeysToOppName(opportunityName);
 		// opportunityPage.clickAccntNamePopup();
 		// opportunityPage.selectAccntName(accountName);
 		opportunityPage.sendKeysToEndDate(sdf.format(cal.getTime()));
 		opportunityPage.selectType(oppType);
 		// opportunityPage.selectStage(oppStage);
-		opportunityPage.sendKeysToAmount("10");
+		opportunityPage.sendKeysToAmount("-10");
 		opportunityPage.sendKeysToDesc("Test Desc");
+		
+		opportunityPage.continueoppcreate();
+		commonUtil.waitForElementToBeClickable(By.id("j_id0:j_id1:i:f:pb:d:Select_Account_Team_Members77.AcctTeamMemberobjectlookup.Choice2.radio")).click();;
 		opportunityPage.continueoppcreate();
 		opportunityPage.clickNavigateToOppty();
+		
 		//driver.switchTo().defaultContent();
-		//opportunityName = driver.findElement(By.xpath(".//*[@id='opp3_ileinner']")).getText();
+		opportunityName = driver.findElement(By.xpath(".//*[@id='opp3_ileinner']")).getText();
 		// opportunityPage.saveOpportunity();
 	}
 

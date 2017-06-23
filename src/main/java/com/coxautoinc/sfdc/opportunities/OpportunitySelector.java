@@ -35,6 +35,7 @@ class OpportunitySelector {
     private By descTxt;
     private By navigateToOppty;
     private By deleteOpptyLink;
+    private By prodOfIntTxt;
     
 
     //~ Constructors ---------------------------------------------------------------------------------------------------
@@ -136,6 +137,10 @@ class OpportunitySelector {
 		return navigateToOppty;
 	}
 
+	public By getProdOfIntTxt() {
+		return prodOfIntTxt;
+	}
+
 	public By getDeleteOpptyLink(String opportunityName) {
 		return By.xpath("//a[contains(text(),'" + opportunityName + "')]/ancestor::tr/td/a[text()='Del']");
 	}
@@ -170,7 +175,7 @@ class OpportunitySelector {
         amountTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskAmount.input");
         descTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskDescription.input");
         navigateToOppty = By.linkText("here");
-        
+        prodOfIntTxt = By.id("j_id0:j_id1:i:f:pb:d:Products_of_Interest_at_risk.input");
     }
     
 

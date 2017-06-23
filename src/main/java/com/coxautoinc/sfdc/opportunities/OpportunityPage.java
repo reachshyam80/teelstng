@@ -211,6 +211,12 @@ public class OpportunityPage {
         commonUtil.waitForElementToBeVisible(opportunitySelector.getDescTxt()).sendKeys(desc);
     }
     
+    public void sendKeysToProdOfInt(String prodOfInt){
+    	logger.info("Entering sendKeysToDesc", prodOfInt);
+        //commonUtil.waitForElementToBeVisible(homeSelector.getSearchInput()).clear();
+        commonUtil.waitForElementToBeVisible(opportunitySelector.getProdOfIntTxt()).sendKeys(prodOfInt);
+    }
+    
     public void clickNavigateToOppty(){
     	commonUtil.waitForElementToBeClickable(opportunitySelector.getNavigateToOppty()).click();
     }
