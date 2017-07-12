@@ -113,7 +113,7 @@ public class LoginRolesTestExecutor extends TestNgBaseClass{
 		userRole = driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[1]/td[4]/a")).getText();
 		userProfile = driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[3]/td[4]/a")).getText();
 		System.out.println("userRole"+userRole);
-		System.out.println("userProfile"+userProfile);
+		//System.out.println("userProfile"+userProfile);
 		if(driver.findElements(roleBasedLoginSelector.getUserLoginBtn()).size() > 0 ){
 			//System.out.println(driver.findElement(By.xpath(".//table[@class='detailList']/tbody/tr[3]/td[4]/a")).getText());
 			commonUtil.waitForElementToBeVisible(By.xpath(".//table[@class='detailList']")).click();
