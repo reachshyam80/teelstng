@@ -138,12 +138,12 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		opportunityPage.sendKeysToDesc("Test Desc");
 		
 		opportunityPage.continueoppcreate();
-		commonUtil.waitForElementToBeClickable(By.id("j_id0:j_id1:i:f:pb:d:Select_Account_Team_Members77.AcctTeamMemberobjectlookup.Choice2.radio")).click();;
+		commonUtil.waitForElementToBeClickable(By.id("j_id0:j_id1:i:f:pb:d:Select_Account_Team_Members77.AcctTeamMemberobjectlookup.Choice2.radio")).click();
 		opportunityPage.continueoppcreate();
 		opportunityPage.clickNavigateToOppty();
 		
 		//driver.switchTo().defaultContent();
-		opportunityName = driver.findElement(By.xpath(".//*[@id='opp3_ileinner']")).getText();
+		//opportunityName = driver.findElement(By.xpath(".//*[@id='opp3_ileinner']")).getText();
 		// opportunityPage.saveOpportunity();
 	}
 
@@ -332,11 +332,11 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		 logger.info("Entering test method: cleanUp");
 
 	        // Search for the dealer.
-		 	opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
+		 	opportunityPage.sendKeysToGlobalSearch(accountName);
 			opportunityPage.clickGlobalSearchBtn();
 
 	        // Click on the dealer from the results page.
-			commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
+			commonUtil.waitForElementUsingFluentWait(By.linkText(accountName)).click();
 
 	        // Find the recent opportunities with the entered test name "Java Test Products".
 	        //accountPage.clickDeleteLinkForOpportunitiesByName(commonUtil.getColumnDataFromExcel(excelFilePath,

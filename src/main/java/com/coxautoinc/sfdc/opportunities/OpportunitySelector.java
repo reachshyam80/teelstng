@@ -175,6 +175,7 @@ class OpportunitySelector {
         amountTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskAmount.input");
         descTxt = By.id("j_id0:j_id1:i:f:pb:d:AtRiskDescription.input");
         navigateToOppty = By.linkText("here");
+        //navigateToOppty = By.xpath(".//*[@id='j_id0:j_id1:i:f:pb:d:final5']/div/font/font/a");
         prodOfIntTxt = By.id("j_id0:j_id1:i:f:pb:d:Products_of_Interest_at_risk.input");
     }
     
