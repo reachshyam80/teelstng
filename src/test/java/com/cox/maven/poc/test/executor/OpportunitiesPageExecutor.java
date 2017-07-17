@@ -115,9 +115,9 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 		System.out.println(sdf.format(cal.getTime()));
 		 //opportunityPage.clickOpportunitiesTab();
 		 //opportunityPage.newOppbtn();
-		opportunityPage.sendKeysToGlobalSearch("testDealerGrp");
+		opportunityPage.sendKeysToGlobalSearch(accountName);
 		opportunityPage.clickGlobalSearchBtn();
-		commonUtil.waitForElementUsingFluentWait(By.linkText("testDealerGrp")).click();
+		commonUtil.waitForElementUsingFluentWait(By.linkText(accountName)).click();
 		opportunityPage.clickNewOpptyBtn();
 		//driver.switchTo().frame(commonUtil.waitForElementUsingFluentWait(By.id("p:i:i:f:pb")));
 		
