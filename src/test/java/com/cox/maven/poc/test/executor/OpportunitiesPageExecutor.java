@@ -258,7 +258,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Test to verify that a competitor can be added to the opportunity
 	 */
-	@Test(dependsOnMethods = "addProductToOpportunity")
+	//@Test(dependsOnMethods = "addProductToOpportunity")
 	public void addCompetitor() {
 		logger.info("Entering test method: addCompetitor");
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("newComp")));
@@ -278,7 +278,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Test to verify that a partner can be added to the opportunity
 	 */
-	@Test(dependsOnMethods = "addCompetitor")
+	//@Test(dependsOnMethods = "addCompetitor")
 	public void addPartner() {
 		logger.info("Entering test method: addPartner");
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("newPartner")));
@@ -295,7 +295,7 @@ public class OpportunitiesPageExecutor extends TestNgBaseClass {
 	/**
 	 * Test to verify that notes can be added to the opportunity
 	 */
-	@Test(dependsOnMethods = "addPartner")
+	@Test(dependsOnMethods = "addProductToOpportunity")
 	public void addNotes() {
 		logger.info("Entering test method: addNotes");
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("newNote")));
