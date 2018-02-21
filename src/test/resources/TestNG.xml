@@ -1,5 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestNG" verbose="1" parallel="tests" thread-count="1">
+<!--  
 <test name="SFDC_UseCase1">
 		<parameter name="baseUrl" value="https://test.salesforce.com" />
 		<parameter name="local" value="false" />
@@ -7,7 +8,7 @@
 		<parameter name="excelFileName" value="SalesforceUseCaseTestData" />
 		<parameter name="excelSheetName" value="Create Opportunity" />
 
-		<!-- Used to point to a Selenium Grid Hub -->
+		< Used to point to a Selenium Grid Hub 
 		<parameter name="remoteUrl" value="http://10.229.30.19:4444/wd/hub"/> 
 
 		<classes>
@@ -15,34 +16,50 @@
 
 		</classes>
 	</test>
-	<!--<test name="SFDC_UseCase2">
+	<test name="SFDC_UseCase2">
 		<parameter name="baseUrl" value="https://test.salesforce.com" />
 		<parameter name="local" value="true" />
 		<parameter name="browserName" value="chrome" />
-		<parameter name="excelFileName" value="SalesforceUseCaseTestData" />
-		<parameter name="excelSheetName" value="Create New Dealer" />
+		<parameter name="excelFileName" value="SalesforceUseCaseTestDataQA" />
+		<parameter name="excelSheetName" value="Create Opportunity" />
 
 
 		<parameter name="remoteUrl" value="http://10.229.30.19:4444/wd/hub"/> 
 
 		<classes>
 			<class name="com.cox.maven.poc.test.executor.CreateNewDealer" />
-
+uyhj
 		</classes>
-	</test>-->
+	</test>
 	<test name="SFDC_UseCase3">
 		<parameter name="baseUrl" value="https://test.salesforce.com" />
 		<parameter name="local" value="false" />
 		<parameter name="browserName" value="chrome" />
 		<parameter name="excelFileName" value="SalesforceUseCaseTestData" />
 		<parameter name="excelSheetName" value="Login Roles" />
+		<parameter name="loginExcelSheetName" value="Login Details" />-->
+
+		<!-- Used to point to a Selenium Grid Hub -->
+	<!--	<parameter name="remoteUrl" value="http:///wd/hub"/> 
+
+		<classes>
+			<class name="com.cox.maven.poc.test.executor.LoginRolesTestExecutor" />
+
+		</classes>
+	</test>-->
+		<test name="Buform">
+		<parameter name="baseUrl" value="https://my.salesforce.com" />
+		<parameter name="local" value="true" />
+		<parameter name="browserName" value="chrome" />
+		<parameter name="excelFileName" value="SalesforceUseCaseTestDataQAexxxxx" />
+		<parameter name="excelSheetName" value="Create Opportunity" />
 		<parameter name="loginExcelSheetName" value="Login Details" />
 
 		<!-- Used to point to a Selenium Grid Hub -->
 		<parameter name="remoteUrl" value="http://10.229.30.19:4444/wd/hub"/> 
 
 		<classes>
-			<class name="com.cox.maven.poc.test.executor.LoginRolesTestExecutor" />
+			<class name="com.cox.maven.poc.test.executor.CreateBuForm" />
 
 		</classes>
 	</test>

@@ -38,19 +38,21 @@ import com.coxautoinc.sfdc.login.LoginPage;
  *
  */
 public class TestNgBaseClass {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(TestNgBaseClass.class);
 
 	WebDriver driver;
 	WebDriverWait wait;
 	protected String baseUrl;
+	protected String browserName;
 	private final String macPath;
 	private final String windowsPath;
 	private static final DesiredCapabilities capability = new DesiredCapabilities();
 	private Map<String, String> testParameters;
 	private final ArrayList<ArrayList<String>> systemParameters;
-	String region="QA";
-	String excelFileName = "SalesforceUseCaseTestDataQA";
+	String region = "QA";
+	String excelFileName = "SalesforceUseCaseTestDataQAexxxxx";
+
 	/**
 	 * Constructor
 	 * 
@@ -59,8 +61,9 @@ public class TestNgBaseClass {
 		this.testParameters = new HashMap<>();
 		this.systemParameters = new ArrayList<>();
 		baseUrl = "";
+		browserName = "chrome";
 		this.macPath = "src//test//resources//drivers//mac//";
-		this.windowsPath = "src//test//resources//drivers//windows";
+		this.windowsPath = "src//test//resources//drivers//windows//";
 	}
 
 	@BeforeClass(alwaysRun = true)
@@ -69,20 +72,20 @@ public class TestNgBaseClass {
 		setupDriver(browserName);
 		baseUrl = capability.getCapability("baseUrl").toString();
 		if (System.getProperty("region") != null) {
-	        region = System.getProperty("region");
-	    }
-		if(region.equalsIgnoreCase("QA")){
-			excelFileName = "SalesforceUseCaseTestDataQA";
-		}else if(region.equalsIgnoreCase("preprod")){
+			region = System.getProperty("region");
+		}
+		if (region.equalsIgnoreCase("QA")) {
+			excelFileName = "SalesforceUseCaseTestDataQAexxxxx";
+		} else if (region.equalsIgnoreCase("preprod")) {
 			excelFileName = "SalesforceUseCaseTestDataPP";
 		}
-		System.out.println("System.getProperty"+System.getProperty("region"));
+		System.out.println("System.getProperty" + System.getProperty("region"));
 	}
-	
+
 	/**
 	 * This common login method can be called by all test modules
 	 */
-	public void login(String userName, String password){
+	public void login(String userName, String password) {
 		logger.info("Entering test method: verifyLoginToSalesForce");
 		LoginPage loginPage = new LoginPage(driver);
 		logger.info("Navigating to url: {}", baseUrl);
@@ -98,11 +101,11 @@ public class TestNgBaseClass {
 	 * capability.getCapability ("userPassword").toString()) by doing this
 	 * loginScreenModule.loginToDealerSite(parameter("userName"),
 	 * parameter("userPassword")) is cleaner. Additionally, use this method for
-	 * arbitrary parameters such as logging into the database, navigating to
-	 * another url, or etc. The code can be,
+	 * arbitrary parameters such as logging into the database, navigating to another
+	 * url, or etc. The code can be,
 	 * loginScreenModule.thisExampleModuleToLoginTheDb(parameter("dbUserName"),
-	 * parameter("dbUserPassword")) and your testng.xml will pass the dbUserName
-	 * and dbUserPassword.
+	 * parameter("dbUserPassword")) and your testng.xml will pass the dbUserName and
+	 * dbUserPassword.
 	 *
 	 * @param paramName
 	 *            in value
@@ -125,7 +128,8 @@ public class TestNgBaseClass {
 	private void setupCapabilities() {
 		// Gathers params from xml
 		testParameters = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getTestParameters();
-
+		// testParameters =
+		// Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getAllParameters();
 		ITestResult result = Reporter.getCurrentTestResult();
 		if (testParameters != null) {
 			for (Object o : testParameters.entrySet()) {
@@ -155,10 +159,9 @@ public class TestNgBaseClass {
 
 	/**
 	 * This will parse the system params using -TP as a flag and place them into
-	 * systemParameters Map. Ensure when you use the mvn commandline you are
-	 * passing '-Dtestparameters' and NOT '-DtestParameters'. If you use the
-	 * capital 'P' your mvn commandline will NOT overwrite the testng.xml
-	 * parameters.
+	 * systemParameters Map. Ensure when you use the mvn commandline you are passing
+	 * '-Dtestparameters' and NOT '-DtestParameters'. If you use the capital 'P'
+	 * your mvn commandline will NOT overwrite the testng.xml parameters.
 	 *
 	 * @param testParameters
 	 *            in value
@@ -176,10 +179,10 @@ public class TestNgBaseClass {
 	}
 
 	/**
-	 * Checks to see if local is set to false. If so it will setup a remoteUrl
-	 * and use the capabilities set by setup Capabilities method. If local is
-	 * true it will check to see if browserName is set to chrome or ie and if
-	 * not it will default to the selenium default of firefox.
+	 * Checks to see if local is set to false. If so it will setup a remoteUrl and
+	 * use the capabilities set by setup Capabilities method. If local is true it
+	 * will check to see if browserName is set to chrome or ie and if not it will
+	 * default to the selenium default of firefox.
 	 *
 	 * @param browserName
 	 *            in value
@@ -206,7 +209,7 @@ public class TestNgBaseClass {
 				capability.setCapability("browserName", "chrome");
 			}
 			capability.setCapability("acceptSslCerts", true);
-			
+
 			try {
 				driver = new RemoteWebDriver(new URL(capability.getCapability("remoteUrl").toString()), capability);
 			} catch (org.openqa.selenium.WebDriverException e) {
@@ -229,9 +232,10 @@ public class TestNgBaseClass {
 				// into Selenium,
 				// but you must have FireFox installed.
 				if (System.getProperty("os.name").startsWith("Mac")) {
-					//System.setProperty("webdriver.gecko.driver", macPath.concat("geckodriver"));
-					//FirefoxDriverManager.getInstance().setup();
-					//System.setProperty("webdriver.firefox.marionette", macPath.concat("geckodriver"));
+					// System.setProperty("webdriver.gecko.driver", macPath.concat("geckodriver"));
+					// FirefoxDriverManager.getInstance().setup();
+					// System.setProperty("webdriver.firefox.marionette",
+					// macPath.concat("geckodriver"));
 				}
 				driver = new FirefoxDriver();
 			}
@@ -239,34 +243,35 @@ public class TestNgBaseClass {
 		wait = new WebDriverWait(driver, 30);
 		driver.manage().window().maximize();
 	}
-	
-	/**
-     * Tear down the Web Driver
-     *
-     * @throws IOException on error
-     */
-    @AfterClass(alwaysRun = true)
-    public void teardown() throws IOException {
-        // This takes a screenshot of the 'test(s)' when the @AfterClass is called. This is useful when using the
-        // Selenium Grid.
-        try {
-            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd hh mm a");
-            Date date = new Date();
 
-            FileUtils.copyFile(screenshot,
-                new File(
-                    "tmp" + File.separator + "ID-" + ((RemoteWebDriver) driver).getSessionId() + "-DATE-"
-                        + dateFormat.format(date) + ".png"));
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
-        if (System.getProperty("os.name").startsWith("Windows")) {
-            // Some folks have non-windows laptop and this causes failure since there is no such 'taskkill' executable
-            // on non-windows OS
-            Runtime.getRuntime().exec("taskkill /f /im plugin-container.exe");
-        }
-        driver.quit();
-    }
+	/**
+	 * Tear down the Web Driver
+	 *
+	 * @throws IOException
+	 *             on error
+	 */
+	@AfterClass(alwaysRun = true)
+	public void teardown() throws IOException {
+		// This takes a screenshot of the 'test(s)' when the @AfterClass is called. This
+		// is useful when using the
+		// Selenium Grid.
+		try {
+			File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd hh mm a");
+			Date date = new Date();
+
+			FileUtils.copyFile(screenshot, new File("tmp" + File.separator + "ID-"
+					+ ((RemoteWebDriver) driver).getSessionId() + "-DATE-" + dateFormat.format(date) + ".png"));
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			// Some folks have non-windows laptop and this causes failure since there is no
+			// such 'taskkill' executable
+			// on non-windows OS
+			Runtime.getRuntime().exec("taskkill /f /im plugin-container.exe");
+		}
+		driver.quit();
+	}
 
 }
